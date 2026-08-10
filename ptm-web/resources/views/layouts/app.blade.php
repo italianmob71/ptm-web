@@ -52,7 +52,7 @@
 
             <!-- Copyright - inline with nav on mobile, separate line on desktop -->
             <div class="text-center text-xs" style="color: var(--color-text-muted);">
-                © {{ date('Y') }} Project Truth Ministries
+                © 2024 - {{ date('Y') }} Project Truth Ministries
             </div>
         </div>
     </footer>
