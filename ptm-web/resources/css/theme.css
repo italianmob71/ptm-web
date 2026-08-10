@@ -156,3 +156,41 @@ html[data-theme="light"] body::before {
   background: var(--color-copper-500);
   color: var(--color-ink-950);
 }
+
+/* === Header logo =========================================== */
+.header-logo {
+  display: none;
+  height: auto;
+  width: auto;
+  /* Desktop default: cap height within h-16 (64px) bar */
+  max-height: 46px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+/* Mobile: slightly smaller */
+@media (max-width: 767px) {
+  .header-logo {
+    max-height: 38px;
+    max-width: 140px;
+  }
+}
+
+/* Show the correct image per theme */
+html[data-theme="dark"] .header-logo-dark {
+  display: block;
+}
+html[data-theme="light"] .header-logo-light {
+  display: block;
+}
+
+/* === Footer background (distinct from page bg) ============= */
+:root,
+html[data-theme="dark"] {
+  --color-footer-bg: oklch(0.17 0.012 45);   /* ink-800: lighter than bg (ink-950) */
+  --color-footer-border: var(--color-ink-700);
+}
+html[data-theme="light"] {
+  --color-footer-bg: oklch(0.84 0.025 78);   /* surface-3: darker than bg (0.97) */
+  --color-footer-border: oklch(0.62 0.030 65);
+}

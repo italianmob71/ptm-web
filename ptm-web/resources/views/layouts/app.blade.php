@@ -13,24 +13,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-full font-sans antialiased" style="background-color: var(--color-bg); color: var(--color-text);">
-    <header class="sticky top-0 z-50 border-b" style="background-color: var(--color-surface); border-color: var(--color-border);">
+<body class="min-h-full font-sans antialiased flex flex-col" style="background-color: var(--color-bg); color: var(--color-text);">
+    <header class="sticky top-0 z-50 border-b shrink-0" style="background-color: var(--color-surface); border-color: var(--color-border);">
         <div class="mx-auto max-w-7xl px-4 h-16 flex items-center">
-            <div class="flex items-center gap-3 flex-shrink-0">
-                <a href="{{ route('home') }}" class="w-8 h-8 flex items-center justify-center rounded text-sm font-bold" style="background-color: var(--color-accent); color: var(--color-text-inv);">
-                    P
+            <div class="flex items-center flex-shrink-0">
+                <a href="{{ route('home') }}" class="block" aria-label="Project Truth Ministries">
+                    <img src="{{ asset('images/site/ptm-dark-menu.png') }}" alt="PTM" class="header-logo header-logo-dark" />
+                    <img src="{{ asset('images/site/ptm-light-menu.png') }}" alt="PTM" class="header-logo header-logo-light" />
                 </a>
-                <a href="{{ route('home') }}" class="font-semibold text-lg tracking-tight">PTM</a>
             </div>
 
-            <nav class="hidden md:flex flex-1 justify-center gap-8 text-sm">
-                <a href="{{ route('home') }}" class="hover:opacity-75" style="color: var(--color-text-muted);">Home</a>
-                <a href="#about" class="hover:opacity-75" style="color: var(--color-text-muted);">About</a>
-                <a href="#resources" class="hover:opacity-75" style="color: var(--color-text-muted);">Resources</a>
+            <nav class="hidden md:flex flex-1 justify-center gap-8 text-sm" aria-label="Main navigation">
+                <x-nav-links />
             </nav>
 
-            <div class="ml-auto md:ml-0">
-                <button id="themeToggle" 
+            <div class="ml-auto md:ml-0 shrink-0">
+                <button id="themeToggle"
                         class="px-3 py-1.5 text-sm rounded-full border flex items-center gap-2"
                         style="border-color: var(--color-border); background-color: var(--color-surface);"
                         aria-label="Toggle theme">
@@ -41,13 +39,21 @@
         </div>
     </header>
 
-    <main>
+    <main class="flex-1">
         @yield('content')
     </main>
 
-    <footer class="border-t py-8 text-center text-sm mt-12" style="border-color: var(--color-border); color: var(--color-text-muted);">
-        <div class="mx-auto max-w-7xl px-4">
-            © {{ date('Y') }} Project Truth Ministries
+    <footer class="shrink-0" style="background-color: var(--color-footer-bg); border-top: 1px solid var(--color-footer-border);">
+        <div class="mx-auto max-w-7xl px-4 py-3">
+            <!-- Footer nav - compact, wraps on mobile -->
+            <div class="flex flex-wrap justify-center gap-4 text-xs mb-2">
+                <x-nav-links />
+            </div>
+
+            <!-- Copyright - inline with nav on mobile, separate line on desktop -->
+            <div class="text-center text-xs" style="color: var(--color-text-muted);">
+                © {{ date('Y') }} Project Truth Ministries
+            </div>
         </div>
     </footer>
 
