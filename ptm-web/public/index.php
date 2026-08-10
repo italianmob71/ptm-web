@@ -1,20 +1,42 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
+// === FORCE PROJECT TEMP DIR (very early) ===
+$tempDir = __DIR__ . "/../storage/temp";
+if (!is_dir($tempDir)) {
+    @mkdir($tempDir, 0775, true);
+}
+putenv("TMPDIR=$tempDir");
+ini_set("sys_temp_dir", $tempDir);
 
-define('LARAVEL_START', microtime(true));
+// Force compiled views into our temp dir
+$viewCompiled = $tempDir . "/views";
+if (!is_dir($viewCompiled)) {
+    @mkdir($viewCompiled, 0775, true);
+}
 
-// Determine if the application is in maintenance mode...
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+define("LARAVEL_START", microtime(true));
+
+if (file_exists($maintenance = __DIR__."/../storage/framework/maintenance.php")) {
     require $maintenance;
 }
 
-// Register the Composer autoloader...
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__."/../vendor/autoload.php";
 
-// Bootstrap Laravel and handle the request...
-/** @var Application $app */
-$app = require_once __DIR__.'/../bootstrap/app.php';
+/** @var \Illuminate\Foundation\Application $app */
+$app = require_once __DIR__."/../bootstrap/app.php";
 
-$app->handleRequest(Request::capture());
+// Force the compiled path very early
+$app->afterBootstrapping(\Illuminate\Foundation\Bootstrap\LoadConfiguration::class, function ($app) use ($viewCompiled) {
+    $app["config"]->set("view.compiled", $viewCompiled);
+});
+
+try {
+    $app->handleRequest(\Illuminate\Http\Request::capture());
+} catch (\Throwable $e) {
+    // Print the REAL error instead of letting the renderer fail
+    header("Content-Type: text/plain; charset=utf-8");
+    echo "=== REAL EXCEPTION (bypassing renderer) ===\n";
+    echo $e->getMessage() . "\n\n";
+    echo $e->getTraceAsString();
+    exit(1);
+}

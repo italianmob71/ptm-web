@@ -1,7 +1,10 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\LandingPageController;
+Route::get('/', [LandingPageController::class, 'index'])->name('home');
+Route::get('/about', function () {
+    return view('about.index', ['title' => 'About']);
+})->name('about');
+Route::get('/resources', function () {
+    return view('resources.index', ['title' => 'Resources']);
+})->name('resources');
