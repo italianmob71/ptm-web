@@ -500,6 +500,180 @@
         color: var(--color-text-inv);
         transform: translateX(4px);
     }
+
+    /* ===== Donate Section ===== */
+    .donate-section {
+        padding: 0 1.5rem 4rem;
+    }
+    @media (min-width: 768px) {
+        .donate-section {
+            padding: 0 2rem 5rem;
+        }
+    }
+
+    .donate-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        max-width: 80rem;
+        margin: 4rem auto 0;
+    }
+    @media (min-width: 768px) {
+        .donate-card {
+            flex-direction: row;
+            margin: 4rem auto 0;
+        }
+    }
+
+    .donate-card__part {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    @media (min-width: 768px) {
+        .donate-card__part {
+            flex: 1 1 0;
+        }
+    }
+
+    /* Part 1: Text */
+    .donate-card__text {
+        background: var(--color-bg);
+        padding: 2.5rem;
+        justify-content: center;
+    }
+    @media (min-width: 768px) {
+        .donate-card__text {
+            padding: 3rem;
+            min-width: 280px;
+        }
+    }
+
+    .donate-card__text-inner {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    @media (min-width: 768px) {
+        .donate-card__text-inner {
+            text-align: left;
+            margin: 0;
+        }
+    }
+
+    .donate-card__title {
+        font-family: var(--font-serif);
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 1.3;
+        margin: 0 0 1rem;
+        color: var(--color-text);
+    }
+    @media (min-width: 768px) {
+        .donate-card__title {
+            font-size: 2rem;
+        }
+    }
+
+    .donate-card__body {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--color-text-muted);
+        margin: 0 0 1.5rem;
+    }
+
+    .donate-card__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: var(--color-accent);
+        color: var(--color-text-inv);
+        font-size: 0.875rem;
+        font-weight: 600;
+        border-radius: var(--radius-md);
+        text-decoration: none;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        width: fit-content;
+    }
+    .donate-card__btn:hover {
+        background: var(--color-accent-hi);
+        transform: translateY(-1px);
+    }
+
+    /* Part 2: Image - sets the height constraint */
+    .donate-card__image {
+        position: relative;
+        background: var(--color-surface-2);
+        flex-shrink: 0;
+    }
+    @media (min-width: 768px) {
+        .donate-card__image {
+            max-width: 33.33%;
+        }
+    }
+
+    .donate-card__img {
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        object-fit: cover;
+        display: block;
+    }
+    @media (min-width: 768px) {
+        .donate-card__img {
+            min-height: 360px;
+        }
+    }
+
+    /* Part 3: Logo */
+    .donate-card__logo {
+        background: var(--color-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+    @media (min-width: 768px) {
+        .donate-card__logo {
+            min-width: 200px;
+            max-width: 200px;
+            padding: 3rem;
+        }
+    }
+
+    .donate-card__logo-inner {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .donate-logo {
+        display: none;
+        height: auto;
+        width: auto;
+        max-height: 80px;
+        max-width: 160px;
+        object-fit: contain;
+    }
+    @media (max-width: 767px) {
+        .donate-logo {
+            max-height: 60px;
+            max-width: 140px;
+        }
+    }
+
+    html[data-theme=dark] .donate-logo-dark {
+        display: block;
+    }
+    html[data-theme=light] .donate-logo-light {
+        display: block;
+    }
 </style>
 
 <div class="video-hero w-full relative overflow-hidden aspect-video md:aspect-auto md:h-[70vh] min-h-[400px]">
@@ -785,6 +959,44 @@
                     <a href="#" class="topic-post__btn">Read Now <span aria-hidden="true">&rarr;</span></a>
                 </div>
             </article>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Donate Section -->
+<section class="donate-section" aria-labelledby="donate-heading">
+    <div class="donate-card">
+        <!-- Part 1: Text / CTA -->
+        <div class="donate-card__part donate-card__text">
+            <div class="donate-card__text-inner">
+                <h2 id="donate-heading" class="donate-card__title">Support Our Cause</h2>
+                <p class="donate-card__body">
+                    Join us in uncovering the truth of Yehovah&rsquo;s Word through Yeshua. Your support fuels research, translation, and the revelation of ancient Hebrew manuscripts that illuminate the path of faith.
+                </p>
+                <a href="#" class="donate-card__btn">Donate Now <span aria-hidden="true">&rarr;</span></a>
+            </div>
+        </div>
+
+        <!-- Part 2: Image -->
+        <div class="donate-card__part donate-card__image">
+            <img src="{{ asset('images/site/revelation-500x500-1.jpg') }}"
+                 alt=""
+                 class="donate-card__img"
+                 loading="lazy" />
+        </div>
+
+        <!-- Part 3: Logo -->
+        <div class="donate-card__part donate-card__logo">
+            <div class="donate-card__logo-inner">
+                <img src="{{ asset('images/site/ptm-dark-menu.png') }}"
+                     alt="Project Truth Ministries"
+                     class="donate-logo donate-logo-dark" />
+                <img src="{{ asset('images/site/ptm-light-menu.png') }}"
+                     alt="Project Truth Ministries"
+                     class="donate-logo donate-logo-light" />
+            </div>
         </div>
     </div>
 </section>
