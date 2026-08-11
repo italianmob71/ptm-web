@@ -7,6 +7,8 @@ use App\Http\Controllers\EventCalendarController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TopicsController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\PasswordUpdateController;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
 Route::get('/team', [TeamController::class, 'index'])->name('team');
@@ -19,3 +21,13 @@ Route::get('/books/{book:slug}', [BookController::class, 'show'])->name('books.s
 Route::get('/resources', function () {
     return view('resources.index', ['title' => 'Resources']);
 })->name('resources');
+
+// Auth routes
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+// Password update routes (for first-time login)
+Route::get('/password/update', [PasswordUpdateController::class, 'create'])->name('password.update.form');
+Route::post('/password/update', [PasswordUpdateController::class, 'store'])->name('password.update');
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
