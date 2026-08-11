@@ -9,8 +9,16 @@
                 ['label' => 'Team', 'href' => route('team')],
             ],
         ],
+        [
+            'label' => 'Resources',
+            'href' => route('resources'),
+            'children' => [
+                ['label' => 'Truths Revealed Blog', 'href' => route('blog.index')],
+                ['label' => 'Truth Topics', 'href' => route('topics.index')],
+                ['label' => 'Book Recommendations', 'href' => route('books.index')],
+            ],
+        ],
         ['label' => 'Studies', 'href' => '#studies'],
-        ['label' => 'Resources', 'href' => route('resources')],
         ['label' => 'Events', 'href' => route('events')],
         ['label' => 'Contact', 'href' => '#contact'],
     ];
@@ -45,7 +53,7 @@
                     x-transition:leave="transition ease-in duration-75"
                     x-transition:leave-start="transform opacity-100 scale-100"
                     x-transition:leave-end="transform opacity-0 scale-95"
-                    class="absolute left-0 mt-2 min-w-[180px] rounded-lg shadow-lg border z-50"
+                    class="absolute left-0 mt-2 min-w-[200px] rounded-lg shadow-lg border z-50"
                     style="background-color: var(--color-surface); border-color: var(--color-border);"
                     @click.outside="open = false"
                 >
