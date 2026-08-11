@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-full font-sans antialiased flex flex-col" style="background-color: var(--color-bg); color: var(--color-text);">
@@ -24,7 +25,7 @@
             </div>
 
             <nav class="hidden md:flex flex-1 justify-center gap-8 text-sm" aria-label="Main navigation">
-                <x-nav-links />
+                <x-nav-links :showDropdowns="true" />
             </nav>
 
             <div class="ml-auto md:ml-0 shrink-0">
@@ -47,7 +48,7 @@
         <div class="mx-auto max-w-7xl px-4 py-3">
             <!-- Footer nav - compact, wraps on mobile -->
             <div class="flex flex-wrap justify-center gap-4 text-xs mb-2">
-                <x-nav-links />
+                <x-nav-links :showDropdowns="true" />
             </div>
 
             <!-- Copyright - inline with nav on mobile, separate line on desktop -->

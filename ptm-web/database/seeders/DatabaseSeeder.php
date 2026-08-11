@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AuthorSeeder::class,
+            EventSeeder::class,
         ]);
 
         // User::factory(10)->create();
