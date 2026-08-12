@@ -8,10 +8,10 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::published()
-            ->active()
+        $books = Book::where('published', true)
+            ->where('active', true)
             ->with('author')
-            ->latest()
+            ->ordered()
             ->paginate(12);
 
         return view('books.index', [
@@ -23,18 +23,18 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->load('author');
-        
+
         // Ensure the book is published and active
         if (!$book->published || !$book->active) {
             abort(404);
         }
 
         // Get other books by same author
-        $otherBooks = Book::published()
-            ->active()
+        $otherBooks = Book::where('published', true)
+            ->where('active', true)
             ->where('author_id', $book->author_id)
             ->where('id', '!=', $book->id)
-            ->latest()
+            ->ordered()
             ->take(4)
             ->get();
 

@@ -2,66 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index()
+    /**
+     * Blog index — display all published posts, paginated, with optional search.
+     */
+    public function index(Request $request)
     {
-        $posts = [
-            [
-                'title' => 'The Scroll of Mysteries Unveiled',
-                'slug' => 'scroll-of-mysteries-unveiled',
-                'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-                'image' => 'revelation-500x500-1.jpg',
-                'date' => '2026-07-15',
-                'author' => 'Janice F. Baca',
-            ],
-            [
-                'title' => 'Cochin Manuscripts: New Discoveries',
-                'slug' => 'cochin-manuscripts-new-discoveries',
-                'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-                'image' => 'new-testament-500x500-1.jpg',
-                'date' => '2026-07-08',
-                'author' => 'Bryan S. Williams',
-            ],
-            [
-                'title' => 'The Covenant of Friendship Explored',
-                'slug' => 'covenant-of-friendship-explored',
-                'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-                'image' => 'renewed-500x500-1.jpg',
-                'date' => '2026-07-01',
-                'author' => 'Justin Leoni',
-            ],
-            [
-                'title' => 'Mount Sinai: Archaeological Evidence',
-                'slug' => 'mount-sinai-archaeological-evidence',
-                'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-                'image' => 'mtSinai-500x500-1.jpg',
-                'date' => '2026-06-28',
-                'author' => 'Bryan S. Williams',
-            ],
-            [
-                'title' => 'Special Studies: Ancient Hebrew Manuscripts',
-                'slug' => 'special-studies-ancient-hebrew-manuscripts',
-                'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-                'image' => 'studies-500x500-1.jpg',
-                'date' => '2026-06-20',
-                'author' => 'Jonathan Meyer',
-            ],
-            [
-                'title' => 'The Renewed Covenant: A Deeper Look',
-                'slug' => 'renewed-covenant-deeper-look',
-                'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-                'image' => 'renewed-500x500-1.jpg',
-                'date' => '2026-06-12',
-                'author' => 'Victor Nuñez',
-            ],
-        ];
+        $search = trim($request->get('q', ''));
+
+        $query = BlogPost::with('author')
+            ->published()
+            ->latestFirst();
+
+        if ($search !== '') {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('slug', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%")
+                  ->orWhere('excerpt', 'like', "%{$search}%");
+            });
+        }
+
+        $posts = $query->paginate(9)->appends(['q' => $search]);
 
         return view('blog.index', [
             'title' => 'Truths Revealed Blog',
             'posts' => $posts,
+            'search' => $search,
+        ]);
+    }
+
+    /**
+     * Show a single blog post by slug.
+     */
+    public function show(string $slug)
+    {
+        $post = BlogPost::with('author')
+            ->published()
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        // Get 3 related posts (excluding current)
+        $related = BlogPost::with('author')
+            ->published()
+            ->where('id', '!=', $post->id)
+            ->latestFirst()
+            ->limit(3)
+            ->get();
+
+        return view('blog.show', [
+            'title' => $post->title,
+            'post' => $post,
+            'related' => $related,
         ]);
     }
 }

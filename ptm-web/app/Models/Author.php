@@ -13,6 +13,7 @@ class Author extends Model
     protected $fillable = [
         'first_name',
         'last_name',
+        'title',
         'middle_initial',
         'bio',
         'image',
@@ -20,6 +21,13 @@ class Author extends Model
         'team_member',
         'priority',
         'social_links',
+        'facebook',
+        'youtube',
+        'rumble',
+        'linkedin',
+        'truthsocial',
+        'tiktok',
+        'x',
     ];
 
     protected $casts = [
@@ -58,5 +66,35 @@ class Author extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('priority')->orderBy('last_name')->orderBy('first_name');
+    }
+
+    /**
+     * Returns array of social platforms with non-null URLs.
+     * Each item: ['platform' => 'facebook', 'url' => 'https://...', 'icon' => 'icon-facebook']
+     */
+    public function getSocialProfilesAttribute(): array
+    {
+        $platforms = [
+            'facebook'    => 'icon-facebook',
+            'youtube'     => 'icon-youtube',
+            'rumble'      => 'icon-rumble',
+            'linkedin'    => 'icon-linkedin',
+            'truthsocial' => 'icon-truthsocial',
+            'tiktok'       => 'icon-tiktok',
+            'x'            => 'icon-x',
+        ];
+
+        $result = [];
+        foreach ($platforms as $field => $icon) {
+            if (!empty($this->$field)) {
+                $result[] = [
+                    'platform' => $field,
+                    'url' => $this->$field,
+                    'icon' => $icon,
+                ];
+            }
+        }
+
+        return $result;
     }
 }

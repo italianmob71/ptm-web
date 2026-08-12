@@ -1,0 +1,154 @@
+/* === CKEditor 5 content area styling ========================================
+   Loaded into the editor iframe via CKEditor's contentCss config.
+   Uses the same design tokens as theme.css so what you see in the editor
+   matches what renders on the public blog/show page in both themes.
+   ======================================================================== */
+
+.ck-content {
+    font-family: var(--font-serif);
+    color: var(--color-text);
+    line-height: 1.8;
+    font-size: 1rem;
+    padding: 1.5rem;
+    background-color: var(--color-bg);
+}
+
+/* Headings */
+.ck-content h1 {
+    font-family: var(--font-serif);
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+.ck-content h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+.ck-content h3 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+}
+.ck-content h4 {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+/* Paragraphs */
+.ck-content p {
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* Links */
+.ck-content a {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+/* Images */
+.ck-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: var(--radius-md);
+}
+
+/* Blockquotes */
+.ck-content blockquote {
+    border-left: 4px solid var(--color-accent);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--color-text-muted);
+}
+
+/* Lists */
+.ck-content ul,
+.ck-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+.ck-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+}
+
+/* Code */
+.ck-content pre {
+    background: var(--color-surface-2);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+.ck-content code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-surface-2);
+    padding: 0.15em 0.35em;
+    border-radius: var(--radius-xs);
+}
+.ck-content pre code {
+    background: none;
+    padding: 0;
+}
+
+/* Horizontal rule */
+.ck-content hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2.5rem 0;
+}
+
+/* Tables */
+.ck-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+.ck-content th,
+.ck-content td {
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+}
+.ck-content th {
+    background: var(--color-surface-2);
+    font-weight: 600;
+    text-align: left;
+}
+
+/* Figure with caption (CKEditor image caption) */
+.ck-content figure {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+.ck-content figcaption {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Bold / italic (CKEditor outputs <strong> and <em>) */
+.ck-content strong { font-weight: 700; }
+.ck-content em { font-style: italic; }
+
+/* Inline code */
+.ck-content code {
+    color: var(--color-accent);
+}

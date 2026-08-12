@@ -15,6 +15,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-full font-sans antialiased flex flex-col" style="background-color: var(--color-bg); color: var(--color-text);">
+
+    {{-- Global SVG icon sprite — hidden, zero layout cost. Use via <svg class="icon"><use xlink:href="#icon-name"></use></svg> --}}
+    @include('partials.icon-sprite')
+
     <header class="sticky top-0 z-50 border-b shrink-0" style="background-color: var(--color-surface); border-color: var(--color-border);">
         <div class="mx-auto max-w-7xl px-4 h-16 flex items-center">
             <div class="flex items-center flex-shrink-0">

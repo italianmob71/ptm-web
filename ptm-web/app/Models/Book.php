@@ -28,6 +28,7 @@ class Book extends Model
         'published_at',
         'published',
         'active',
+        'priority',
         'page_count',
         'language',
         'price_usd',
@@ -37,12 +38,14 @@ class Book extends Model
         'published_at' => 'date',
         'published' => 'boolean',
         'active' => 'boolean',
+        'priority' => 'integer',
         'price_usd' => 'decimal:2',
     ];
 
     protected $attributes = [
         'published' => false,
         'active' => true,
+        'priority' => 0,
         'language' => 'English',
     ];
 
@@ -54,19 +57,33 @@ class Book extends Model
         return $this->belongsTo(Author::class);
     }
 
-    // Scope for published books
+    /**
+     * Scope: published AND active books only.
+     */
     public function scopePublished($query)
     {
         return $query->where('published', true)->where('active', true);
     }
 
-    // Scope for active books
+    /**
+     * Scope: active books only.
+     */
     public function scopeActive($query)
     {
         return $query->where('active', true);
     }
 
-    // Scope ordered by published date
+    /**
+     * Scope: order by priority (asc, lower = first), then by published_at desc.
+     */
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('priority', 'asc')->orderBy('published_at', 'desc');
+    }
+
+    /**
+     * Scope: order by published_at desc (legacy, kept for compatibility).
+     */
     public function scopeLatest($query)
     {
         return $query->orderBy('published_at', 'desc');

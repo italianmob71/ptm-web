@@ -51,15 +51,18 @@
                             <div class="book-card__actions">
                                 @if($book->amazon_link)
                                     <a href="{{ $book->amazon_link }}" target="_blank" rel="noopener noreferrer" class="book-btn book-btn--amazon">
+                                        <svg class="btn-icon" aria-hidden="true"><use xlink:href="#icon-amazon"></use></svg>
                                         Amazon
                                     </a>
                                 @endif
                                 @if($book->lulu_link)
                                     <a href="{{ $book->lulu_link }}" target="_blank" rel="noopener noreferrer" class="book-btn book-btn--lulu">
+                                        <svg class="btn-icon" aria-hidden="true"><use xlink:href="#icon-book"></use></svg>
                                         Lulu
                                     </a>
                                 @endif
                                 <a href="{{ route('books.show', $book->slug) }}" class="book-btn book-btn--details">
+                                    <svg class="btn-icon" aria-hidden="true"><use xlink:href="#icon-search"></use></svg>
                                     Details
                                 </a>
                             </div>
@@ -205,6 +208,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        gap: 0.35rem;
         padding: 0.5rem 1rem;
         font-size: 0.75rem;
         font-weight: 600;
@@ -212,6 +216,12 @@
         text-decoration: none;
         transition: all 0.2s ease;
         white-space: nowrap;
+    }
+
+    .btn-icon {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
     }
 
     .book-btn--amazon {

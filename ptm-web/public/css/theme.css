@@ -114,23 +114,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle paper-grain */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, var(--color-ink-700) 1px, transparent 0);
-  background-size: 24px 24px;
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
-  mask-image: radial-gradient(ellipse at top, black 0%, transparent 70%);
-}
-html[data-theme="light"] body::before {
-  background-image: radial-gradient(circle at 1px 1px, var(--color-ink-200) 1px, transparent 0);
-  opacity: 0.5;
-  mask-image: radial-gradient(ellipse at top, black 0%, transparent 70%);
-}
+/* Paper-grain dots removed per user request */
 
 /* Focus ring */
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
@@ -138,6 +122,14 @@ html[data-theme="light"] body::before {
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
+/* Inline SVG icon sizing */
+.btn-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex-shrink: 0;
+    fill: currentColor;
+}
+
 
 /* Hebrew */
 .hebrew {

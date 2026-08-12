@@ -22,6 +22,21 @@
         ['label' => 'Events', 'href' => route('events')],
         ['label' => 'Contact', 'href' => '#contact'],
     ];
+
+    // Super-admin only links (security level 9)
+    if (auth()->check() && auth()->user()->isSuperAdmin()) {
+        $links[] = [
+            'label' => 'Admin',
+            'href' => '#',
+            'children' => [
+                ['label' => 'Books', 'href' => route('admin.books.index')],
+                ['label' => 'Authors', 'href' => route('admin.authors.index')],
+                ['label' => 'Blog Posts', 'href' => route('admin.blog.index')],
+                ['label' => 'Images', 'href' => route('admin.images.index')],
+            ],
+        ];
+    }
+
     $showDropdowns = $showDropdowns ?? true;
 @endphp
 

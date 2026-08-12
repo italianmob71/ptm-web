@@ -785,7 +785,7 @@
         <p class="about-ptm__body">
             At Project Truth Ministries (PTM) we are dedicated to providing you with Biblical truths to include archaeological findings, Biblical research, such as in the Tanakh (Old Testament). We are also dedicated to revealing truths found in the New Testament manuscripts discovered in Hebrew and Aramaic.
         </p>
-        <a href="#" class="about-ptm__btn">Learn More <span aria-hidden="true">→</span></a>
+        <a href="{{ route('about') }}" class="about-ptm__btn">Learn More <span aria-hidden="true">→</span></a>
     </div>
 
     <div class="about-ptm__video" aria-label="PTM introduction video">
@@ -811,50 +811,38 @@
 
         <!-- Blog Posts Grid -->
         <div class="blog-grid">
-            <!-- Post 1 -->
-            <article class="blog-post">
-                <img src="{{ asset('images/site/revelation-500x500-1.jpg') }}"
-                     alt=""
-                     class="blog-post__image"
-                     loading="lazy" />
-                <div class="blog-post__content">
-                    <h3 class="blog-post__title">The Scroll of Mysteries Unveiled</h3>
-                    <p class="blog-post__excerpt">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                    </p>
-                    <a href="#" class="blog-post__btn">Read Now <span aria-hidden="true">&rarr;</span></a>
-                </div>
-            </article>
-
-            <!-- Post 2 -->
-            <article class="blog-post">
-                <img src="{{ asset('images/site/new-testament-500x500-1.jpg') }}"
-                     alt=""
-                     class="blog-post__image"
-                     loading="lazy" />
-                <div class="blog-post__content">
-                    <h3 class="blog-post__title">Cochin Manuscripts: New Discoveries</h3>
-                    <p class="blog-post__excerpt">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                    </p>
-                    <a href="#" class="blog-post__btn">Read Now <span aria-hidden="true">&rarr;</span></a>
-                </div>
-            </article>
-
-            <!-- Post 3 -->
-            <article class="blog-post">
-                <img src="{{ asset('images/site/renewed-500x500-1.jpg') }}"
-                     alt=""
-                     class="blog-post__image"
-                     loading="lazy" />
-                <div class="blog-post__content">
-                    <h3 class="blog-post__title">The Covenant of Friendship Explored</h3>
-                    <p class="blog-post__excerpt">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                    </p>
-                    <a href="#" class="blog-post__btn">Read Now <span aria-hidden="true">&rarr;</span></a>
-                </div>
-            </article>
+            @forelse ($latestPosts as $post)
+                <article class="blog-post">
+                    @if ($post->featured_image)
+                        <img src="{{ asset('images/site/' . $post->featured_image) }}"
+                             alt="{{ $post->title }}"
+                             class="blog-post__image"
+                             loading="lazy" />
+                    @endif
+                    <div class="blog-post__content">
+                        <time style="display: block; font-size: 0.75rem; color: var(--color-accent); margin-bottom: 0.5rem;">
+                            {{ $post->published_at?->format('F j, Y') ?? $post->created_at->format('F j, Y') }}
+                        </time>
+                        <h3 class="blog-post__title">
+                            <a href="{{ route('blog.show', $post->slug) }}" style="color: inherit; text-decoration: none;">{{ $post->title }}</a>
+                        </h3>
+                        <p class="blog-post__excerpt">
+                            {{ $post->excerpt_text }}
+                        </p>
+                        <p class="blog-post__author" style="font-size: 0.8125rem; color: var(--color-text-muted); margin-top: 0.75rem;">
+                            By {{ $post->author?->full_name ?? 'Unknown' }}
+                        </p>
+                        <a href="{{ route('blog.show', $post->slug) }}" class="blog-post__btn">Read Now <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </article>
+            @empty
+                <article class="blog-post">
+                    <div class="blog-post__content">
+                        <h3 class="blog-post__title">No posts yet</h3>
+                        <p class="blog-post__excerpt">Check back soon for new articles.</p>
+                    </div>
+                </article>
+            @endforelse
         </div>
     </div>
 </section>
