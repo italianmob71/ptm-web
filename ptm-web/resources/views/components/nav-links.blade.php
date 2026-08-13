@@ -14,11 +14,14 @@
             'href' => route('resources'),
             'children' => [
                 ['label' => 'Truths Revealed Blog', 'href' => route('blog.index')],
+                ['label' => 'Articles', 'href' => route('articles.index')],
                 ['label' => 'Truth Topics', 'href' => route('topics.index')],
                 ['label' => 'Book Recommendations', 'href' => route('books.index')],
             ],
         ],
-        ['label' => 'Studies', 'href' => '#studies'],
+        ['label' => 'Studies', 'href' => '#studies', 'children' => [
+            ['label' => "Bryan's Travel Notes", 'href' => route('travel-notes.index')],
+        ]],
         ['label' => 'Events', 'href' => route('events')],
         ['label' => 'Contact', 'href' => '#contact'],
     ];
@@ -33,6 +36,9 @@
                 ['label' => 'Authors', 'href' => route('admin.authors.index')],
                 ['label' => 'Blog Posts', 'href' => route('admin.blog.index')],
                 ['label' => 'Images', 'href' => route('admin.images.index')],
+                ['label' => 'Articles', 'href' => route('admin.articles.index')],
+                ['label' => 'PDFs', 'href' => route('admin.pdfs.index')],
+                ['label' => 'Travel Notes', 'href' => route('admin.travel-notes.index')],
             ],
         ];
     }

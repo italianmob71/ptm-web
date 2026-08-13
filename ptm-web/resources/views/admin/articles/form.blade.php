@@ -3,7 +3,7 @@
 @section('content')
 <div class="mx-auto max-w-4xl px-4 py-8">
     <h1 class="font-serif text-3xl font-bold mb-6" style="color: var(--color-text);">
-        {{ $post->exists ? 'Edit: ' . Str::limit($post->title, 50) : 'Add New Blog Post' }}
+        {{ $article->exists ? 'Edit: ' . Str::limit($article->title, 50) : 'Add New Article' }}
     </h1>
 
     @if ($errors->any())
@@ -16,17 +16,17 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ $post->exists ? route('admin.blog.update', $post) : route('admin.blog.store') }}"
-          id="blog-post-form">
+    <form method="POST" action="{{ $article->exists ? route('admin.articles.update', $article) : route('admin.articles.store') }}"
+          id="article-form">
         @csrf
-        @if ($post->exists)
+        @if ($article->exists)
             @method('PUT')
         @endif
 
         <!-- Title -->
         <div class="mb-4">
             <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Title *</label>
-            <input type="text" name="title" value="{{ old('title', $post->title) }}"
+            <input type="text" name="title" value="{{ old('title', $article->title) }}"
                    class="w-full px-3 py-2 rounded-lg border"
                    style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);"
                    required>
@@ -36,7 +36,7 @@
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
                 <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Slug <span class="text-xs" style="color: var(--color-text-faint);">(leave empty to auto-generate)</span></label>
-                <input type="text" name="slug" value="{{ old('slug', $post->slug) }}"
+                <input type="text" name="slug" value="{{ old('slug', $article->slug) }}"
                        class="w-full px-3 py-2 rounded-lg border font-mono text-sm"
                        style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);"
                        placeholder="auto-generated-from-title">
@@ -48,7 +48,7 @@
                         style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);">
                     <option value="">— No Author —</option>
                     @foreach ($authors as $author)
-                        <option value="{{ $author->id }}" {{ old('author_id', $post->author_id) == $author->id ? 'selected' : '' }}>
+                        <option value="{{ $author->id }}" {{ old('author_id', $article->author_id) == $author->id ? 'selected' : '' }}>
                             {{ $author->full_name }}{{ $author->title ? ' (' . $author->title . ')' : '' }}
                         </option>
                     @endforeach
@@ -56,45 +56,44 @@
             </div>
         </div>
 
-        <!-- Excerpt -->
+        <!-- Summary -->
         <div class="mb-4">
-            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Excerpt <span class="text-xs" style="color: var(--color-text-faint);">(auto-generated from content if left empty)</span></label>
-            <textarea name="excerpt" rows="3"
+            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Summary <span class="text-xs" style="color: var(--color-text-faint);">(shown on the article listing page)</span></label>
+            <textarea name="summary" rows="3"
                       class="w-full px-3 py-2 rounded-lg border"
-                      style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);">{{ old('excerpt', $post->excerpt) }}</textarea>
+                      style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);">{{ old('summary', $article->summary) }}</textarea>
         </div>
 
         <!-- Content (CKEditor 5) -->
         <div class="mb-4">
-            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Content *</label>
+            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Content <span class="text-xs" style="color: var(--color-text-faint);">(use the toolbar to insert images and PDFs)</span></label>
             <textarea name="content" id="editor"
                       class="w-full"
-                      style="border-color: var(--color-border);">{{ old('content', $post->content) }}</textarea>
+                      style="border-color: var(--color-border);">{{ old('content', $article->content) }}</textarea>
         </div>
 
-        <!-- Featured Image -->
-        <div class="mb-4">
-            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Featured Image Filename <span class="text-xs" style="color: var(--color-text-faint);">(stored in public/images/site/)</span></label>
-            <input type="text" name="featured_image" value="{{ old('featured_image', $post->featured_image) }}"
-                   class="w-full px-3 py-2 rounded-lg border text-sm"
-                   style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);"
-                   placeholder="e.g. revelation-500x500-1.jpg">
-        </div>
-
-        <!-- Two-column: Published checkbox and Published At date -->
-        <div class="grid grid-cols-2 gap-4 mb-6">
+        <!-- NOSEARCH + Published row -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
             <div>
                 <label class="flex items-center gap-2 text-sm" style="color: var(--color-text);">
-                    <input type="checkbox" name="published" value="1" {{ old('published', $post->published) ? 'checked' : '' }}>
-                    Published
+                    <input type="checkbox" name="nosearch" value="1"
+                           {{ old('nosearch', str_starts_with($article->slug ?? '', 'NOSEARCH-')) ? 'checked' : '' }}>
+                    NOSEARCH
                 </label>
-                <p class="text-xs mt-1" style="color: var(--color-text-faint);">Check to make this post visible on the site.</p>
+                <p class="text-xs mt-1" style="color: var(--color-text-faint);">Excludes from site search (slug gets NOSEARCH- prefix).</p>
             </div>
             <div>
-                <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Published At <span class="text-xs" style="color: var(--color-text-faint);">(leave empty for now)</span></label>
+                <label class="flex items-center gap-2 text-sm" style="color: var(--color-text);">
+                    <input type="checkbox" name="published" value="1" {{ old('published', $article->published) ? 'checked' : '' }}>
+                    Published
+                </label>
+                <p class="text-xs mt-1" style="color: var(--color-text-faint);">Check to make this article visible.</p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Published At</label>
                 <input type="datetime-local" name="published_at"
-                       value="{{ old('published_at', $post->published_at?->format('Y-m-d\TH:i')) }}"
-                       class="w-full px-3 py-2 rounded-lg border"
+                       value="{{ old('published_at', $article->published_at?->format('Y-m-d\TH:i')) }}"
+                       class="w-full px-3 py-2 rounded-lg border text-sm"
                        style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);">
             </div>
         </div>
@@ -104,24 +103,23 @@
             <button type="submit" id="submit-btn"
                     class="px-6 py-2 text-sm rounded-lg font-medium"
                     style="background-color: var(--color-accent); color: var(--color-text-inv);">
-                {{ $post->exists ? 'Update Post' : 'Create Post' }}
+                {{ $article->exists ? 'Update Article' : 'Create Article' }}
             </button>
-            <a href="{{ route('admin.blog.index') }}"
+            <a href="{{ route('admin.articles.index') }}"
                class="text-sm"
                style="color: var(--color-text-muted);">Cancel</a>
         </div>
     </form>
 </div>
 
-<!-- CKEditor 5 — custom self-hosted PTM build -->
+<!-- CKEditor 5 — custom self-hosted PTM build (same as blog, with imagePicker + pdfPicker) -->
 <link rel="stylesheet" href="{{ asset('css/ckeditor5.css') }}">
 <script src="{{ asset('js/ptm-editor.js') }}"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script>
-// Make CSRF token available for CKEditor upload adapter
 window.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('blog-post-form');
+    const form = document.getElementById('article-form');
     const textarea = document.getElementById('editor');
 
     (window.PTMEditor.default || window.PTMEditor)
@@ -147,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <style>
-/* CKEditor 5 dark theme integration */
+/* CKEditor 5 theme integration — same as blog form */
 .ck.ck-toolbar {
     background: var(--color-surface-2) !important;
     border-color: var(--color-border) !important;

@@ -1,5 +1,6 @@
 // Custom CKEditor 5 Classic build for PTM
-// Includes: alignment, strikethrough, subscript, superscript, removeFormat, indent
+// Includes: alignment, strikethrough, subscript, superscript, removeFormat, indent,
+//           image picker (custom), pdf picker (custom)
 
 import {
     ClassicEditor,
@@ -37,6 +38,7 @@ import {
 } from 'ckeditor5';
 
 import ImagePicker from './imagepicker.js';
+import PdfPicker from './pdfpicker.js';
 
 class PTMEditor extends ClassicEditor {}
 PTMEditor.builtinPlugins = [
@@ -71,7 +73,8 @@ PTMEditor.builtinPlugins = [
     ImageUpload,
     CKFinder,
     FileRepository,
-    ImagePicker
+    ImagePicker,
+    PdfPicker
 ];
 
 PTMEditor.defaultConfig = {
@@ -98,12 +101,14 @@ PTMEditor.defaultConfig = {
             'insertTable',
             'horizontalLine',
             'removeFormat',
-            '|',
+            '-',
             'imagePicker',
+            'pdfPicker',
             '|',
             'undo',
             'redo'
-        ]
+        ],
+        shouldNotGroupWhenFull: true
     },
     alignment: {
         options: ['left', 'center', 'right', 'justify']
@@ -128,4 +133,3 @@ PTMEditor.defaultConfig = {
 };
 
 export default PTMEditor;
-

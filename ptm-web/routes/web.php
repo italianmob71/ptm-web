@@ -6,12 +6,17 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\EventCalendarController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\TravelNoteController;
+use App\Http\Controllers\TravelNoteAdminController;
 use App\Http\Controllers\TopicsController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookAdminController;
 use App\Http\Controllers\AuthorAdminController;
 use App\Http\Controllers\BlogPostAdminController;
 use App\Http\Controllers\ImageAdminController;
+use App\Http\Controllers\ArticleAdminController;
+use App\Http\Controllers\PdfAdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordUpdateController;
 
@@ -21,6 +26,10 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/events', [EventCalendarController::class, 'index'])->name('events');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/travel-notes', [TravelNoteController::class, 'index'])->name('travel-notes.index');
+Route::get('/travel-notes/{slug}', [TravelNoteController::class, 'show'])->name('travel-notes.show');
 Route::get('/topics', [TopicsController::class, 'index'])->name('topics.index');
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/{book:slug}', [BookController::class, 'show'])->name('books.show');
@@ -76,4 +85,30 @@ Route::middleware(['auth', 'level:9'])->prefix('admin')->name('admin.')->group(f
     Route::get('/images/{image}/edit', [ImageAdminController::class, 'edit'])->name('images.edit');
     Route::put('/images/{image}', [ImageAdminController::class, 'update'])->name('images.update');
     Route::delete('/images/{image}', [ImageAdminController::class, 'destroy'])->name('images.destroy');
+
+    // Articles
+    Route::get('/articles', [ArticleAdminController::class, 'index'])->name('articles.index');
+    Route::get('/articles/create', [ArticleAdminController::class, 'create'])->name('articles.create');
+    Route::post('/articles', [ArticleAdminController::class, 'store'])->name('articles.store');
+    Route::get('/articles/{article}/edit', [ArticleAdminController::class, 'edit'])->name('articles.edit');
+    Route::put('/articles/{article}', [ArticleAdminController::class, 'update'])->name('articles.update');
+    Route::delete('/articles/{article}', [ArticleAdminController::class, 'destroy'])->name('articles.destroy');
+
+    // PDFs
+    Route::get('/pdfs', [PdfAdminController::class, 'index'])->name('pdfs.index');
+    Route::get('/pdfs/create', [PdfAdminController::class, 'create'])->name('pdfs.create');
+    Route::post('/pdfs', [PdfAdminController::class, 'store'])->name('pdfs.store');
+    Route::post('/pdfs/ckeditor-upload', [PdfAdminController::class, 'ckeditorUpload'])->name('pdfs.ckeditor');
+    Route::get('/pdfs/search', [PdfAdminController::class, 'search'])->name('pdfs.search');
+    Route::get('/pdfs/{pdf}/edit', [PdfAdminController::class, 'edit'])->name('pdfs.edit');
+    Route::put('/pdfs/{pdf}', [PdfAdminController::class, 'update'])->name('pdfs.update');
+    Route::delete('/pdfs/{pdf}', [PdfAdminController::class, 'destroy'])->name('pdfs.destroy');
+
+    // Travel Notes
+    Route::get('/travel-notes', [TravelNoteAdminController::class, 'index'])->name('travel-notes.index');
+    Route::get('/travel-notes/create', [TravelNoteAdminController::class, 'create'])->name('travel-notes.create');
+    Route::post('/travel-notes', [TravelNoteAdminController::class, 'store'])->name('travel-notes.store');
+    Route::get('/travel-notes/{note}/edit', [TravelNoteAdminController::class, 'edit'])->name('travel-notes.edit');
+    Route::put('/travel-notes/{note}', [TravelNoteAdminController::class, 'update'])->name('travel-notes.update');
+    Route::delete('/travel-notes/{note}', [TravelNoteAdminController::class, 'destroy'])->name('travel-notes.destroy');
 });

@@ -226,6 +226,9 @@
         margin: 1.5rem 0;
         border-radius: var(--radius-md);
     }
+    /* Images in tables — shrink to fit cell */
+    .article-body td img { max-width: 100% !important; height: auto !important; }
+    .article-body table { table-layout: auto; }
     .article-body blockquote {
         border-left: 4px solid var(--color-accent);
         padding-left: 1.5rem;
