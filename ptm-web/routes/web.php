@@ -9,6 +9,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TravelNoteController;
 use App\Http\Controllers\TravelNoteAdminController;
+use App\Http\Controllers\VideoAdminController;
 use App\Http\Controllers\TopicsController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookAdminController;
@@ -17,6 +18,9 @@ use App\Http\Controllers\BlogPostAdminController;
 use App\Http\Controllers\ImageAdminController;
 use App\Http\Controllers\ArticleAdminController;
 use App\Http\Controllers\PdfAdminController;
+use App\Http\Controllers\PdfViewerController;
+use App\Http\Controllers\VideoViewerController;
+use App\Http\Controllers\ImageViewerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordUpdateController;
 
@@ -33,6 +37,12 @@ Route::get('/travel-notes/{slug}', [TravelNoteController::class, 'show'])->name(
 Route::get('/topics', [TopicsController::class, 'index'])->name('topics.index');
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/{book:slug}', [BookController::class, 'show'])->name('books.show');
+
+// Public viewer routes for file types
+Route::get('/pdfs/{slug}', [PdfViewerController::class, 'show'])->name('pdfs.show');
+Route::get('/videos/{slug}', [VideoViewerController::class, 'show'])->name('videos.show');
+Route::get('/images/{slug}', [ImageViewerController::class, 'show'])->name('images.show');
+
 Route::get('/resources', function () {
     return view('resources.index', ['title' => 'Resources']);
 })->name('resources');
@@ -111,4 +121,13 @@ Route::middleware(['auth', 'level:9'])->prefix('admin')->name('admin.')->group(f
     Route::get('/travel-notes/{note}/edit', [TravelNoteAdminController::class, 'edit'])->name('travel-notes.edit');
     Route::put('/travel-notes/{note}', [TravelNoteAdminController::class, 'update'])->name('travel-notes.update');
     Route::delete('/travel-notes/{note}', [TravelNoteAdminController::class, 'destroy'])->name('travel-notes.destroy');
+
+    // Videos
+    Route::get('/videos', [VideoAdminController::class, 'index'])->name('videos.index');
+    Route::get('/videos/create', [VideoAdminController::class, 'create'])->name('videos.create');
+    Route::post('/videos', [VideoAdminController::class, 'store'])->name('videos.store');
+    Route::get('/videos/search', [VideoAdminController::class, 'search'])->name('videos.search');
+    Route::get('/videos/{video}/edit', [VideoAdminController::class, 'edit'])->name('videos.edit');
+    Route::put('/videos/{video}', [VideoAdminController::class, 'update'])->name('videos.update');
+    Route::delete('/videos/{video}', [VideoAdminController::class, 'destroy'])->name('videos.destroy');
 });

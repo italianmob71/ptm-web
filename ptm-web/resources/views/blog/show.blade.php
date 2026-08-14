@@ -37,6 +37,9 @@
         {!! $post->content !!}
     </div>
 
+    {{-- See Also: auto-populated by slug relevancy --}}
+    <x-see-also :source="$post" :limit="6" />
+
     @if ($post->author)
     <!-- About the author -->
     <section class="author-card">

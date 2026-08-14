@@ -62,6 +62,15 @@ class Image extends Model
     }
 
     /**
+     * Scope: published (Images don't have a published flag —
+     * all records are considered available if they exist).
+     */
+    public function scopePublished($query)
+    {
+        return $query;
+    }
+
+    /**
      * Full public URL to the image.
      */
     public function getUrlAttribute(): string

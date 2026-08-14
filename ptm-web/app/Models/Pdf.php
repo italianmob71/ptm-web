@@ -56,6 +56,15 @@ class Pdf extends Model
     }
 
     /**
+     * Scope: published (PDFs don't have a published flag —
+     * all records are considered available if they exist).
+     */
+    public function scopePublished($query)
+    {
+        return $query;
+    }
+
+    /**
      * Get distinct categories for dropdowns.
      */
     public static function categories()
