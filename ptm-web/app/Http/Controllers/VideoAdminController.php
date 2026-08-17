@@ -147,12 +147,8 @@ class VideoAdminController extends Controller
         ]);
 
         $newSlug = $validated['slug'] ?: Video::generateUniqueSlug($validated['title'], $video->id);
-        if ($newSlug !== $video->slug) {
-            if (Video::where('slug', $newSlug)->where('id', '!=', $video->id)->exists()) {
-                return back()->withErrors(['slug' => 'Slug already in use.'])->withInput();
-            }
-            $video->slug = $newSlug;
-        }
+        // Slugs are NOT unique for videos — just use whatever is given
+        $video->slug = $newSlug;
 
         $video->title = $validated['title'];
         $video->description = $validated['description'] ?? null;

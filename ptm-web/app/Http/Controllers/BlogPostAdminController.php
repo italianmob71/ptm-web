@@ -46,7 +46,7 @@ class BlogPostAdminController extends Controller
         $validated = $request->validate([
             'author_id'      => ['nullable', 'exists:authors,id'],
             'title'          => ['required', 'string', 'max:255'],
-            'slug'           => ['nullable', 'string', 'max:255', 'unique:blog_posts,slug'],
+            'slug'           => ['nullable', 'string', 'max:255'],
             'content'        => ['required', 'string'],
             'excerpt'        => ['nullable', 'string'],
             'featured_image' => ['nullable', 'string', 'max:255'],
@@ -57,13 +57,6 @@ class BlogPostAdminController extends Controller
         // Auto-generate slug if not provided
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
-            // Ensure uniqueness
-            $count = 1;
-            $baseSlug = $validated['slug'];
-            while (BlogPost::where('slug', $validated['slug'])->exists()) {
-                $validated['slug'] = "{$baseSlug}-{$count}";
-                $count++;
-            }
         }
 
         // Fix: unchecked checkbox
@@ -103,7 +96,7 @@ class BlogPostAdminController extends Controller
         $validated = $request->validate([
             'author_id'      => ['nullable', 'exists:authors,id'],
             'title'          => ['required', 'string', 'max:255'],
-            'slug'           => ['nullable', 'string', 'max:255', 'unique:blog_posts,slug,' . $post->id],
+            'slug'           => ['nullable', 'string', 'max:255'],
             'content'        => ['required', 'string'],
             'excerpt'        => ['nullable', 'string'],
             'featured_image' => ['nullable', 'string', 'max:255'],

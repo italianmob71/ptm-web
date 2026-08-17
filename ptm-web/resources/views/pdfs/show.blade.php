@@ -66,6 +66,6 @@
     </div>
 
     {{-- See Also --}}
-    <x-see-also :source="$pdf" :limit="6" />
+    <x-see-also :source="$pdf" :limit="15" />
 </div>
 @endsection

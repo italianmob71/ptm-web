@@ -124,9 +124,6 @@ class TravelNoteAdminController extends Controller
             $newSlug = TravelNote::generateUniqueSlug($validated['title'], $note->id);
         }
         if ($newSlug !== $note->slug) {
-            if (TravelNote::where('slug', $newSlug)->where('id', '!=', $note->id)->exists()) {
-                return back()->withErrors(['slug' => 'Slug already in use.'])->withInput();
-            }
             $note->slug = $newSlug;
         }
 

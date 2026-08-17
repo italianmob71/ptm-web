@@ -39,6 +39,8 @@ import {
 
 import ImagePicker from './imagepicker.js';
 import PdfPicker from './pdfpicker.js';
+import ScriptureQuote from './scripturequote.js';
+import TableHeaderToggle from './tableheadertoggle.js';
 
 class PTMEditor extends ClassicEditor {}
 PTMEditor.builtinPlugins = [
@@ -74,7 +76,9 @@ PTMEditor.builtinPlugins = [
     CKFinder,
     FileRepository,
     ImagePicker,
-    PdfPicker
+    PdfPicker,
+    ScriptureQuote,
+    TableHeaderToggle
 ];
 
 PTMEditor.defaultConfig = {
@@ -98,7 +102,9 @@ PTMEditor.defaultConfig = {
             'indent',
             '|',
             'blockQuote',
+            'scriptureQuote',
             'insertTable',
+            'tableHeaderToggle',
             'horizontalLine',
             'removeFormat',
             '-',

@@ -56,6 +56,9 @@
                     <tr style="border-bottom: 1px solid var(--color-border-soft);">
                         <td class="py-3 px-2">
                             <div class="font-medium">{{ $article->title }}</div>
+                            @if ($article->sub_title)
+                                <div class="text-xs" style="color: var(--color-text-muted);">{{ $article->sub_title }}</div>
+                            @endif
                             <div class="text-xs" style="color: var(--color-text-faint);">{{ $article->slug }}</div>
                         </td>
                         <td class="py-3 px-2">{{ $article->author?->full_name ?? '&mdash;' }}</td>

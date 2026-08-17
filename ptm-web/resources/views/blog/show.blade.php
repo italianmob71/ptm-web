@@ -38,7 +38,7 @@
     </div>
 
     {{-- See Also: auto-populated by slug relevancy --}}
-    <x-see-also :source="$post" :limit="6" />
+    <x-see-also :source="$post" :limit="15" />
 
     @if ($post->author)
     <!-- About the author -->

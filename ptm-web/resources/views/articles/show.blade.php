@@ -9,6 +9,9 @@
                 <span aria-hidden="true">&larr;</span> All Articles
             </a>
             <h1 class="s-article-title" itemprop="headline">{{ $article->title }}</h1>
+            @if ($article->sub_title)
+                <p class="s-article-subtitle">{{ $article->sub_title }}</p>
+            @endif
             <div class="s-article-meta">
                 <span class="s-article-meta__author" itemprop="author">
                     By <strong>{{ $article->author?->full_name ?? 'Unknown' }}</strong>
@@ -113,6 +116,13 @@
         color: var(--color-text); margin: 0 0 1rem;
     }
     @media (min-width: 768px) { .s-article-title { font-size: 2.25rem; } }
+
+    .s-article-subtitle {
+        font-family: var(--font-serif);
+        font-size: 1.125rem; font-weight: 400; line-height: 1.5;
+        color: var(--color-text-muted); margin: -0.5rem 0 1rem 0;
+        font-style: italic;
+    }
 
     .s-article-meta {
         font-size: 0.875rem; color: var(--color-text-muted);

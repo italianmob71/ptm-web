@@ -173,9 +173,6 @@ class PdfAdminController extends Controller
 
         $newSlug = $validated['slug'] ?? null;
         if ($newSlug && $newSlug !== $pdf->slug) {
-            if (Pdf::where('slug', $newSlug)->where('id', '!=', $pdf->id)->exists()) {
-                return back()->withErrors(['slug' => 'Slug already in use.'])->withInput();
-            }
             $pdf->slug = $newSlug;
         }
 

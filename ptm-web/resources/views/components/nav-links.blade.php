@@ -1,4 +1,13 @@
 @php
+    use App\Models\CochinBook;
+
+    // Dynamic Cochin books submenu — only published books
+    $cochinBooks = CochinBook::published()->ordered()->get(['slug', 'title']);
+    $cochinChildren = $cochinBooks->map(fn($b) => [
+        'label' => $b->title,
+        'href'  => route('cochin.show', $b->slug),
+    ])->toArray();
+
     $links = [
         ['label' => 'Home', 'href' => route('home')],
         [
@@ -19,15 +28,13 @@
                 ['label' => 'Book Recommendations', 'href' => route('books.index')],
             ],
         ],
-        ['label' => 'Studies', 'href' => '#studies', 'children' => [
-            ['label' => 'Cochin Hebrew New Testament', 'href' => '#cochin', 'children' => [
-                ['label' => 'Matthew', 'href' => '#cochin-matthew'],
-                ['label' => 'James', 'href' => '#cochin-james'],
-                ['label' => 'Revelation', 'href' => '#cochin-revelation'],
-            ]],
-            ['label' => 'Renewed Covenant', 'href' => '#renewed-covenant'],
-            ['label' => "Bryan's Travel Notes", 'href' => route('travel-notes.index')],
-        ]],
+        ['label' => 'Studies', 'href' => '#studies', 'children' => array_merge(
+            [
+                ['label' => 'Cochin Hebrew New Testament', 'href' => '#cochin', 'children' => $cochinChildren],
+                ['label' => 'Renewed Covenant', 'href' => '#renewed-covenant'],
+                ['label' => "Bryan's Travel Notes", 'href' => route('travel-notes.index')],
+            ]
+        )],
         ['label' => 'Events', 'href' => route('events')],
         ['label' => 'Contact', 'href' => '#contact'],
     ];
@@ -38,6 +45,7 @@
             'label' => 'Admin',
             'href' => '#',
             'children' => [
+                ['label' => 'Users', 'href' => route('admin.users.index')],
                 ['label' => 'Books', 'href' => route('admin.books.index')],
                 ['label' => 'Authors', 'href' => route('admin.authors.index')],
                 ['label' => 'Blog Posts', 'href' => route('admin.blog.index')],
@@ -46,6 +54,7 @@
                 ['label' => 'PDFs', 'href' => route('admin.pdfs.index')],
                 ['label' => 'Videos', 'href' => route('admin.videos.index')],
                 ['label' => 'Travel Notes', 'href' => route('admin.travel-notes.index')],
+                ['label' => 'Cochin Books', 'href' => route('admin.cochin-books.index')],
             ],
         ];
     }
@@ -170,7 +179,7 @@
                                 >
                                     <span>{{ $child['label'] }}</span>
                                     <svg class="w-3 h-3 transition-transform" :class="subopen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"/>
                                     </svg>
                                 </button>
                                 <div x-show="subopen" x-collapse style="padding-left: 1rem;">

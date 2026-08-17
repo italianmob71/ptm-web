@@ -32,6 +32,15 @@
                    required>
         </div>
 
+        <!-- Sub-title -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Sub-title <span class="text-xs" style="color: var(--color-text-faint);">(optional, shown below the title)</span></label>
+            <input type="text" name="sub_title" value="{{ old('sub_title', $article->sub_title) }}"
+                   class="w-full px-3 py-2 rounded-lg border"
+                   style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);"
+                   placeholder="A secondary title or tagline">
+        </div>
+
         <!-- Two-column: Slug and Author -->
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div>

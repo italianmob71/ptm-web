@@ -21,6 +21,9 @@ use App\Http\Controllers\PdfAdminController;
 use App\Http\Controllers\PdfViewerController;
 use App\Http\Controllers\VideoViewerController;
 use App\Http\Controllers\ImageViewerController;
+use App\Http\Controllers\CochinBookController;
+use App\Http\Controllers\CochinBookAdminController;
+use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordUpdateController;
 
@@ -43,6 +46,9 @@ Route::get('/pdfs/{slug}', [PdfViewerController::class, 'show'])->name('pdfs.sho
 Route::get('/videos/{slug}', [VideoViewerController::class, 'show'])->name('videos.show');
 Route::get('/images/{slug}', [ImageViewerController::class, 'show'])->name('images.show');
 
+// Cochin Hebrew NT books
+Route::get('/studies/cochin/{slug}', [CochinBookController::class, 'show'])->name('cochin.show');
+
 Route::get('/resources', function () {
     return view('resources.index', ['title' => 'Resources']);
 })->name('resources');
@@ -64,6 +70,14 @@ Route::post('/admin/images/ckeditor-upload', [ImageAdminController::class, 'cked
 
 // Admin routes — super-admin only (security level 9)
 Route::middleware(['auth', 'level:9'])->prefix('admin')->name('admin.')->group(function () {
+    // Users
+    Route::get('/users', [UserAdminController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserAdminController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserAdminController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}/edit', [UserAdminController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserAdminController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserAdminController::class, 'destroy'])->name('users.destroy');
+
     // Books
     Route::get('/books', [BookAdminController::class, 'index'])->name('books.index');
     Route::get('/books/create', [BookAdminController::class, 'create'])->name('books.create');
@@ -130,4 +144,17 @@ Route::middleware(['auth', 'level:9'])->prefix('admin')->name('admin.')->group(f
     Route::get('/videos/{video}/edit', [VideoAdminController::class, 'edit'])->name('videos.edit');
     Route::put('/videos/{video}', [VideoAdminController::class, 'update'])->name('videos.update');
     Route::delete('/videos/{video}', [VideoAdminController::class, 'destroy'])->name('videos.destroy');
+
+    // Cochin Books
+    Route::get('/cochin-books', [CochinBookAdminController::class, 'index'])->name('cochin-books.index');
+    Route::get('/cochin-books/create', [CochinBookAdminController::class, 'create'])->name('cochin-books.create');
+    Route::post('/cochin-books', [CochinBookAdminController::class, 'store'])->name('cochin-books.store');
+    Route::get('/cochin-books/{book}/edit', [CochinBookAdminController::class, 'edit'])->name('cochin-books.edit');
+    Route::put('/cochin-books/{book}', [CochinBookAdminController::class, 'update'])->name('cochin-books.update');
+    Route::delete('/cochin-books/{book}', [CochinBookAdminController::class, 'destroy'])->name('cochin-books.destroy');
+
+    // Cochin Book Chapters
+    Route::post('/cochin-books/{book}/chapters', [CochinBookAdminController::class, 'storeChapter'])->name('cochin-books.chapters.store');
+    Route::put('/cochin-books/{book}/chapters/{chapter}', [CochinBookAdminController::class, 'updateChapter'])->name('cochin-books.chapters.update');
+    Route::delete('/cochin-books/{book}/chapters/{chapter}', [CochinBookAdminController::class, 'destroyChapter'])->name('cochin-books.chapters.destroy');
 });

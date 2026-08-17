@@ -50,6 +50,7 @@ class ArticleAdminController extends Controller
     {
         $validated = $request->validate([
             'title'         => ['required', 'string', 'max:500'],
+            'sub_title'     => ['nullable', 'string', 'max:500'],
             'author_id'      => ['nullable', 'exists:authors,id'],
             'slug'           => ['nullable', 'string', 'max:255'],
             'summary'       => ['nullable', 'string', 'max:1000'],
@@ -108,6 +109,7 @@ class ArticleAdminController extends Controller
     {
         $validated = $request->validate([
             'title'         => ['required', 'string', 'max:500'],
+            'sub_title'     => ['nullable', 'string', 'max:500'],
             'author_id'      => ['nullable', 'exists:authors,id'],
             'slug'           => ['nullable', 'string', 'max:255'],
             'summary'       => ['nullable', 'string', 'max:1000'],
@@ -135,13 +137,11 @@ class ArticleAdminController extends Controller
         }
 
         if ($newSlug !== $article->slug) {
-            if (Article::where('slug', $newSlug)->where('id', '!=', $article->id)->exists()) {
-                return back()->withErrors(['slug' => 'Slug already in use.'])->withInput();
-            }
             $article->slug = $newSlug;
         }
 
         $article->title = $validated['title'];
+        $article->sub_title = $validated['sub_title'] ?? null;
         $article->author_id = $validated['author_id'] ?? null;
         $article->summary = $validated['summary'] ?? null;
         $article->content = !empty($validated['content']) ? $validated['content'] : null;

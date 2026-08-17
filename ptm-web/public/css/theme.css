@@ -186,3 +186,93 @@ html[data-theme="light"] {
   --color-footer-bg: oklch(0.84 0.025 78);   /* surface-3: darker than bg (0.97) */
   --color-footer-border: oklch(0.62 0.030 65);
 }
+
+/* === PTM Scripture Quote (front-end rendering) ===================== */
+.ptm-scripture {
+  border-left: 4px solid var(--color-accent);
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background: var(--color-surface-2);
+  padding: 0.75rem 1rem 0.75rem 1.25rem;
+  margin: 1rem 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.ptm-scripture p { margin: 0; }
+.ptm-scripture p + p { margin-top: 0.5rem; }
+
+/* === PTM Table cell defaults — top + left ===================== */
+article td,
+article th,
+.prose-scholarly td,
+.prose-scholarly th,
+.ptm-scripture td,
+.ptm-scripture th,
+.s-article-body td,
+.s-article-body th {
+  vertical-align: top;
+  text-align: left;
+}
+
+/* === PTM Table width — fill container ======================== */
+article table,
+.prose-scholarly table,
+.s-article-body table,
+.ptm-scripture table {
+  width: 100%;
+}
+
+/* === PTM Table — figure wrapper + table fill container ============== */
+article figure.table,
+.prose-scholarly figure.table,
+.s-article-body figure.table,
+.s-article-body figure.table > table {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+article figure.table > table,
+.s-article-body figure.table > table {
+  width: 100% !important;
+  table-layout: auto;
+}
+
+/* === PTM Table header row — bold + surface-2 bg ===================== */
+article table thead th,
+article table thead td,
+.prose-scholarly table thead th,
+.prose-scholarly table thead td,
+.s-article-body table thead th,
+.s-article-body table thead td {
+  font-weight: 700;
+  color: var(--color-text);
+  background: var(--color-surface-2);
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+/* === PTM Global H1/H2 — primary accent color per theme ============= */
+/* Gold on dark theme, copper-red on light theme */
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2 {
+  color: var(--color-accent) !important;
+}
+
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+html[data-theme="light"] h1,
+html[data-theme="light"] h2 {
+  color: var(--color-accent) !important;
+}
+
+/* Fallback: when no data-theme attribute is set, use default (dark) */
+h1, h2 {
+  color: var(--color-accent) !important;
+}

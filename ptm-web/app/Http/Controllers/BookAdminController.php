@@ -47,7 +47,7 @@ class BookAdminController extends Controller
         $validated = $request->validate([
             'title'        => ['required', 'string', 'max:255'],
             'subtitle'     => ['nullable', 'string', 'max:255'],
-            'slug'         => ['nullable', 'string', 'max:255', 'unique:books,slug'],
+            'slug'         => ['nullable', 'string', 'max:255'],
             'author_id'    => ['required', 'exists:authors,id'],
             'body'         => ['nullable', 'string'],
             'isbn_13'      => ['nullable', 'string', 'max:20'],
@@ -112,7 +112,7 @@ class BookAdminController extends Controller
         $validated = $request->validate([
             'title'        => ['required', 'string', 'max:255'],
             'subtitle'     => ['nullable', 'string', 'max:255'],
-            'slug'         => ['nullable', 'string', 'max:255', 'unique:books,slug,' . $book->id],
+            'slug'         => ['nullable', 'string', 'max:255'],
             'author_id'    => ['required', 'exists:authors,id'],
             'body'         => ['nullable', 'string'],
             'isbn_13'      => ['nullable', 'string', 'max:20'],

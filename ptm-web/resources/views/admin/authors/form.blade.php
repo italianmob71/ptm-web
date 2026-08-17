@@ -16,7 +16,8 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ $author->exists ? route('admin.authors.update', $author) : route('admin.authors.store') }}">
+    <form method="POST" action="{{ $author->exists ? route('admin.authors.update', $author) : route('admin.authors.store') }}"
+          id="author-form">
         @csrf
         @if ($author->exists)
             @method('PUT')
@@ -59,12 +60,12 @@
             </div>
         </div>
 
-        <!-- Bio -->
+        <!-- Bio (CKEditor 5) -->
         <div class="mb-4">
-            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Bio</label>
-            <textarea name="bio" rows="6"
-                      class="w-full px-3 py-2 rounded-lg border"
-                      style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);">{{ old('bio', $author->bio) }}</textarea>
+            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Bio <span class="text-xs" style="color: var(--color-text-faint);">(rich text with toolbar)</span></label>
+            <textarea name="bio" id="bio-editor"
+                      class="w-full"
+                      style="border-color: var(--color-border);">{{ old('bio', $author->bio) }}</textarea>
         </div>
 
         <!-- Image filename -->
@@ -143,4 +144,92 @@
         </div>
     </form>
 </div>
+
+{{-- CKEditor 5 — custom self-hosted PTM build --}}
+<link rel="stylesheet" href="{{ asset('css/ckeditor5.css') }}">
+<script src="{{ asset('js/ptm-editor.js') }}"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script>
+window.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('author-form');
+    const textarea = document.getElementById('bio-editor');
+
+    (window.PTMEditor.default || window.PTMEditor)
+        .create(textarea, {
+            licenseKey: 'GPL',
+            ckfinder: {
+                uploadUrl: '{{ route("admin.images.ckeditor") }}',
+                requestHeaders: {
+                    'X-CSRF-TOKEN': window.csrfToken
+                }
+            }
+        })
+        .then(editor => {
+            window.ckeditorInstance = editor;
+            form.addEventListener('submit', function () {
+                textarea.value = editor.getData();
+            });
+        })
+        .catch(error => {
+            console.error('CKEditor init error:', error);
+        });
+});
+</script>
+
+<style>
+/* CKEditor 5 theme integration — matches blog/articles forms */
+.ck.ck-toolbar {
+    background: var(--color-surface-2) !important;
+    border-color: var(--color-border) !important;
+    border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+}
+.ck.ck-toolbar button {
+    color: var(--color-text-muted) !important;
+}
+.ck.ck-toolbar button.ck-on,
+.ck.ck-toolbar button:hover {
+    color: var(--color-accent) !important;
+}
+.ck.ck-toolbar .ck.ck-dropdown__panel {
+    background: var(--color-surface) !important;
+    border-color: var(--color-border) !important;
+}
+.ck.ck-editor__editable {
+    background-color: var(--color-bg) !important;
+    color: var(--color-text) !important;
+    border-color: var(--color-border) !important;
+    border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+    min-height: 150px;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+.ck.ck-editor__editable:focus {
+    border-color: var(--color-accent) !important;
+}
+.ck.ck-content {
+    font-family: var(--font-serif) !important;
+    font-size: 1rem !important;
+    line-height: 1.8 !important;
+    color: var(--color-text) !important;
+    padding: 1rem !important;
+}
+.ck.ck-content blockquote {
+    border-left: 4px solid var(--color-accent) !important;
+    padding: 0.5rem 1rem !important;
+    margin: 1rem 0 !important;
+    font-style: italic !important;
+    color: var(--color-text-muted) !important;
+    background: var(--color-surface-2) !important;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
+}
+.ck.ck-content blockquote p {
+    margin: 0.25rem 0 !important;
+}
+.ck.ck-content td img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+.ck.ck-content table { table-layout: auto !important; }
+</style>
 @endsection

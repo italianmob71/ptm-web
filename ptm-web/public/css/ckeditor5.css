@@ -7623,3 +7623,92 @@ div.ck.ck-balloon-panel.ck-mention-balloon {
 }
 
 /*# sourceMappingURL=ckeditor5.css.map */
+/* ════════════════════════════════════════════════════════════════
+ * PTM Scripture Quote — custom block element styling
+ * Used in both CKEditor editing view and front-end render.
+ * Left accent vertical bar, distinct from blockQuote (which uses
+ * a plain gray border + italic). Scripture uses accent-color bar,
+ * slightly larger text, normal (non-italic) weight, surface-2 bg.
+ * ════════════════════════════════════════════════════════════════ */
+
+.ck-content .ptm-scripture,
+.ptm-scripture {
+    border-left: 4px solid var(--color-accent, #c5a572);
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background: var(--color-surface-2, rgba(128,128,128,0.04));
+    padding: 0.75rem 1rem 0.75rem 1.25rem;
+    margin: 1rem 0;
+    color: var(--color-text-muted, inherit);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.ck-content .ptm-scripture p,
+.ptm-scripture p {
+    margin: 0;
+}
+
+.ck-content .ptm-scripture p + p,
+.ptm-scripture p + p {
+    margin-top: 0.5rem;
+}
+
+/* Dark theme: accent bar glows slightly, surface-2 is subtle dark */
+:root[data-theme="dark"] .ptm-scripture,
+:root .dark .ptm-scripture {
+    border-left-color: var(--color-accent, #c5a572);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text-muted, #aaa);
+}
+
+/* Light theme: accent is copper-red, surface-2 is warm cream */
+:root[data-theme="light"] .ptm-scripture,
+:root .light .ptm-scripture {
+    border-left-color: var(--color-accent, #b04a2f);
+    background: rgba(80, 50, 30, 0.03);
+    color: var(--color-text-muted, #6b5a4e);
+}
+
+/* ════════════════════════════════════════════════════════════════
+ * PTM Table cell defaults — vertical-align: top, text-align: left
+ * Applies in CKEditor editing view AND front-end render.
+ * ════════════════════════════════════════════════════════════════ */
+.ck-content td,
+.ck-content th,
+article td,
+article th,
+.prose-scholarly td,
+.prose-scholarly th,
+.ptm-scripture td,
+.ptm-scripture th {
+    vertical-align: top !important;
+    text-align: left !important;
+}
+
+/* PTM Table width — fill container */
+.ck-content table,
+.ck-content figure.table > table {
+    width: 100% !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+ * PTM Table header row styling — applies when a table has a header
+ * row (thead). Visually distinct from body rows.
+ * ════════════════════════════════════════════════════════════════ */
+.ck-content table thead th,
+.ck-content table thead td,
+article table thead th,
+article table thead td,
+.prose-scholarly table thead th,
+.prose-scholarly table thead td,
+.s-article-body table thead th,
+.s-article-body table thead td {
+    font-weight: 700;
+    color: var(--color-text);
+    background: var(--color-surface-2, rgba(128,128,128,0.06));
+    text-align: left;
+    vertical-align: top;
+    padding: 0.5rem 0.75rem;
+}

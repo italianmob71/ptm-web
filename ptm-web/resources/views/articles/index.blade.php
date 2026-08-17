@@ -46,6 +46,9 @@
                                     {{ $article->title }}
                                 </a>
                             </h3>
+                            @if ($article->sub_title)
+                                <p class="article-card__subtitle">{{ $article->sub_title }}</p>
+                            @endif
                             @if ($article->summary)
                                 <p class="article-card__summary">{{ $article->summary }}</p>
                             @elseif ($article->content)
@@ -149,6 +152,12 @@
         margin: 0 0 0.75rem; color: var(--color-text);
     }
     .article-card__title a { color: inherit; text-decoration: none; }
+
+    .article-card__subtitle {
+        font-family: var(--font-serif);
+        font-size: 0.875rem; font-weight: 400; font-style: italic;
+        color: var(--color-text-muted); margin: -0.5rem 0 0.75rem;
+    }
 
     .article-card__summary {
         font-size: 0.875rem; line-height: 1.65;

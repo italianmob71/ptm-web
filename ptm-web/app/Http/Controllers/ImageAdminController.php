@@ -140,7 +140,7 @@ class ImageAdminController extends Controller
     public function update(Request $request, Image $image)
     {
         $request->validate([
-            'slug' => 'required|string|max:255|unique:images,slug,' . $image->id,
+            'slug' => 'required|string|max:255',
             'alt_text' => 'nullable|string|max:500',
             'caption' => 'nullable|string|max:500',
             'category' => 'nullable|string|max:100',

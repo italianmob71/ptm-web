@@ -51,6 +51,6 @@
     @endif
 
     {{-- See Also --}}
-    <x-see-also :source="$image" :limit="6" />
+    <x-see-also :source="$image" :limit="15" />
 </div>
 @endsection
