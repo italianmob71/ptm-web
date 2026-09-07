@@ -189,7 +189,7 @@
                     </div>
                 </div>
 
-                <div class="event-modal-desc" x-show="modal.event?.description" x-text="modal.event?.description"></div>
+                <div class="event-modal-desc" x-show="modal.event?.description" x-html="modal.event?.description"></div>
 
             <div class="event-modal-desc" x-show="!modal.event?.description" style="font-style: italic; opacity: 0.7;">
                 No description provided.
