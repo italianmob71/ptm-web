@@ -529,8 +529,9 @@
 <section aria-labelledby="features-heading">
     <h2 id="features-heading" class="sr-only">Featured Studies</h2>
 
+    <!--
     <div class="feature-cards">
-        <!-- Card 1: Cochin Revelation -->
+        <! -- Card 1: Cochin Revelation -- >
         <article class="feature-card">
             <img src="{{ asset('images/site/revelation-500x500-2.jpg') }}"
                  alt=""
@@ -544,7 +545,7 @@
             </div>
         </article>
 
-        <!-- Card 2: Cochin New Testament -->
+        <! -- Card 2: Cochin New Testament -- >
         <article class="feature-card">
             <img src="{{ asset('images/site/new-testament-500x500-1.jpg') }}"
                  alt=""
@@ -558,7 +559,7 @@
             </div>
         </article>
 
-        <!-- Card 3: The Renewed Covenant -->
+        <! -- Card 3: The Renewed Covenant -- >
         <article class="feature-card">
             <img src="{{ asset('images/site/renewed-500x500-1.jpg') }}"
                  alt=""
@@ -572,7 +573,7 @@
             </div>
         </article>
 
-        <!-- Card 4: Special Studies -->
+        <! -- Card 4: Special Studies -- >
         <article class="feature-card">
             <img src="{{ asset('images/site/studies-500x500-1.jpg') }}"
                  alt=""
@@ -587,6 +588,7 @@
         </article>
     </div>
 </section>
+-->
 
 <!-- About Living Scroll Section -->
 <section class="about-ptm" aria-labelledby="about-heading">
