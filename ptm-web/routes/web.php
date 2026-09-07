@@ -26,6 +26,7 @@ use App\Http\Controllers\ImageViewerController;
 use App\Http\Controllers\CochinBookController;
 use App\Http\Controllers\CochinBookAdminController;
 use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\EventAdminController;
 use App\Http\Controllers\SettingsAdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordUpdateController;
@@ -150,6 +151,14 @@ Route::middleware(['auth', 'level:9'])->prefix('admin')->name('admin.')->group(f
     Route::get('/videos/{video}/edit', [VideoAdminController::class, 'edit'])->name('videos.edit');
     Route::put('/videos/{video}', [VideoAdminController::class, 'update'])->name('videos.update');
     Route::delete('/videos/{video}', [VideoAdminController::class, 'destroy'])->name('videos.destroy');
+
+    // Events
+    Route::get('/events', [EventAdminController::class, 'index'])->name('events.index');
+    Route::get('/events/create', [EventAdminController::class, 'create'])->name('events.create');
+    Route::post('/events', [EventAdminController::class, 'store'])->name('events.store');
+    Route::get('/events/{event}/edit', [EventAdminController::class, 'edit'])->name('events.edit');
+    Route::put('/events/{event}', [EventAdminController::class, 'update'])->name('events.update');
+    Route::delete('/events/{event}', [EventAdminController::class, 'destroy'])->name('events.destroy');
 
     // Cochin Books
     Route::get('/cochin-books', [CochinBookAdminController::class, 'index'])->name('cochin-books.index');

@@ -118,11 +118,8 @@ class EventCalendarController extends Controller
 
     private function generateDayView(Carbon $date, $events): array
     {
-        $dayEvents = $events->filter(function ($e) use ($date) {
-            $start = Carbon::parse($e['starts_at']);
-            $end = $e['ends_at'] ? Carbon::parse($e['ends_at']) : $start->copy()->addHour();
-            return $date->between($start, $end) || $date->equalTo($start) || $date->equalTo($end);
-        })->values();
+        $target = $date->toDateString();
+        $dayEvents = $events->filter(fn($e) => $this->eventTouchesDate($e, $target))->values();
 
         return [
             'date' => $date->format('Y-m-d'),
@@ -136,14 +133,11 @@ class EventCalendarController extends Controller
     {
         $start = $baseDate->copy()->startOfWeek();
         $days = [];
-        
+
         for ($i = 0; $i < 7; $i++) {
             $day = $start->copy()->addDays($i);
-            $dayEvents = $events->filter(function ($e) use ($day) {
-                $start = Carbon::parse($e['starts_at']);
-                $end = $e['ends_at'] ? Carbon::parse($e['ends_at']) : $start->copy()->addHour();
-                return $day->between($start, $end) || $day->equalTo($start) || $day->equalTo($end);
-            })->values();
+            $target = $day->toDateString();
+            $dayEvents = $events->filter(fn($e) => $this->eventTouchesDate($e, $target))->values();
 
             $days[] = [
                 'date' => $day->format('Y-m-d'),
@@ -169,11 +163,8 @@ class EventCalendarController extends Controller
 
         $current = $start->copy();
         while ($current <= $end) {
-            $dayEvents = $events->filter(function ($e) use ($current) {
-                $start = Carbon::parse($e['starts_at']);
-                $end = $e['ends_at'] ? Carbon::parse($e['ends_at']) : $start->copy()->addHour();
-                return $current->between($start, $end) || $current->equalTo($start) || $current->equalTo($end);
-            })->values();
+            $target = $current->toDateString();
+            $dayEvents = $events->filter(fn($e) => $this->eventTouchesDate($e, $target))->values();
 
             $week[] = [
                 'date' => $current->format('Y-m-d'),
@@ -201,5 +192,17 @@ class EventCalendarController extends Controller
             'year' => $baseDate->year,
             'weeks' => $weeks,
         ];
+    }
+
+    /**
+     * Does this event touch the given calendar day (Y-m-d)?
+     * Compares by date-string, not timestamp, so a day-bucket includes any event
+     * whose [start, end] range intersects that day regardless of time.
+     */
+    private function eventTouchesDate($e, string $target): bool
+    {
+        $startDate = Carbon::parse($e['starts_at'])->toDateString();
+        $endDate = $e['ends_at'] ? Carbon::parse($e['ends_at'])->toDateString() : $startDate;
+        return $target >= $startDate && $target <= $endDate;
     }
 }
