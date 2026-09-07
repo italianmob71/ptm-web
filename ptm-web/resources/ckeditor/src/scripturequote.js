@@ -1,5 +1,5 @@
 /**
- * ScriptureQuote — custom CKEditor 5 plugin for PTM
+ * ScriptureQuote — custom CKEditor 5 plugin for Living Scroll
  *
  * Adds a toolbar button with a quote/scroll icon. When clicked, wraps the
  * selected text (or current block) in a <div class="ptm-scripture"> element

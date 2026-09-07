@@ -6,7 +6,7 @@
         <!-- Header -->
         <header class="tn-card__header">
             <div class="tn-card__title-lines">
-                <span class="tn-card__line1">Project Truth Ministries &ndash; Presents</span>
+                <span class="tn-card__line1">Living Scroll &ndash; Presents</span>
                 <span class="tn-card__line2">Bryan's Travel Notes</span>
             </div>
             <form method="GET" action="{{ route('travel-notes.index') }}" class="tn-search-form">

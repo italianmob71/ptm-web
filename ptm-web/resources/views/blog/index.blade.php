@@ -7,7 +7,7 @@
         <!-- Section Title Bar -->
         <header class="blog-card__header">
             <div class="blog-card__title-lines">
-                <span class="blog-card__line1">Project Truth Ministries &ndash; Presents</span>
+                <span class="blog-card__line1">Living Scroll &ndash; Presents</span>
                 <span class="blog-card__line2">Truths Revealed Blog</span>
             </div>
             <form method="GET" action="{{ route('blog.index') }}" class="blog-search-form">

@@ -1,5 +1,5 @@
 /**
- * ImagePicker — custom CKEditor 5 plugin for PTM
+ * ImagePicker — custom CKEditor 5 plugin for Living Scroll
  *
  * Adds a toolbar button with an image icon. When clicked, opens a modal
  * overlay with three tabs: Upload New, Search Library, and URL.

@@ -121,7 +121,7 @@
     </form>
 </div>
 
-<!-- CKEditor 5 — custom self-hosted PTM build (same as blog, with imagePicker + pdfPicker) -->
+<!-- CKEditor 5 — custom self-hosted Living Scroll build (same as blog, with imagePicker + pdfPicker) -->
 <link rel="stylesheet" href="{{ asset('css/ckeditor5.css') }}">
 <script src="{{ asset('js/ptm-editor.js') }}"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">

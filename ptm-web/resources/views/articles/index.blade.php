@@ -7,7 +7,7 @@
         <!-- Section Title Bar -->
         <header class="articles-card__header">
             <div class="articles-card__title-lines">
-                <span class="articles-card__line1">Project Truth Ministries &ndash; Presents</span>
+                <span class="articles-card__line1">Living Scroll &ndash; Presents</span>
                 <span class="articles-card__line2">Scholarly Articles</span>
             </div>
             <form method="GET" action="{{ route('articles.index') }}" class="articles-search-form">

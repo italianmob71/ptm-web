@@ -34,7 +34,14 @@
                             @if($book->subtitle)
                                 <h4 class="book-card__subtitle">{{ $book->subtitle }}</h4>
                             @endif
-                            <p class="book-card__author">By {{ $book->author->full_name ?? $book->author->first_name . ' ' . $book->author->last_name }}</p>
+                            <p class="book-card__author">
+                                @php($a = $book->author)
+                                @if($a)
+                                    By {{ $a->full_name ?? trim(($a->first_name ?? '') . ' ' . ($a->last_name ?? '')) ?: 'Unknown' }}
+                                @else
+                                    By Unknown
+                                @endif
+                            </p>
                             <p class="book-card__excerpt">{{ $book->body ? \Illuminate\Support\Str::limit(strip_tags($book->body), 120) : 'No description available.' }}</p>
                             
                             <div class="book-card__meta">

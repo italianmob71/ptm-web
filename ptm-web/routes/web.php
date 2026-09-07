@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\RenewedCovenantController;
 use App\Http\Controllers\EventCalendarController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ArticleController;
@@ -24,12 +26,16 @@ use App\Http\Controllers\ImageViewerController;
 use App\Http\Controllers\CochinBookController;
 use App\Http\Controllers\CochinBookAdminController;
 use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\SettingsAdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordUpdateController;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
 Route::get('/team', [TeamController::class, 'index'])->name('team');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/contact',  [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/studies/renewed-covenant', [RenewedCovenantController::class, 'index'])->name('renewed-covenant');
 Route::get('/events', [EventCalendarController::class, 'index'])->name('events');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
@@ -157,4 +163,9 @@ Route::middleware(['auth', 'level:9'])->prefix('admin')->name('admin.')->group(f
     Route::post('/cochin-books/{book}/chapters', [CochinBookAdminController::class, 'storeChapter'])->name('cochin-books.chapters.store');
     Route::put('/cochin-books/{book}/chapters/{chapter}', [CochinBookAdminController::class, 'updateChapter'])->name('cochin-books.chapters.update');
     Route::delete('/cochin-books/{book}/chapters/{chapter}', [CochinBookAdminController::class, 'destroyChapter'])->name('cochin-books.chapters.destroy');
+
+    // Settings
+    Route::get('/settings', [SettingsAdminController::class, 'index'])->name('settings.index');
+    Route::get('/settings/{setting}/edit', [SettingsAdminController::class, 'edit'])->name('settings.edit');
+    Route::put('/settings/{setting}', [SettingsAdminController::class, 'update'])->name('settings.update');
 });

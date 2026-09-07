@@ -1,4 +1,4 @@
-// Custom CKEditor 5 Classic build for PTM
+// Custom CKEditor 5 Classic build for Living Scroll
 // Includes: alignment, strikethrough, subscript, superscript, removeFormat, indent,
 //           image picker (custom), pdf picker (custom)
 

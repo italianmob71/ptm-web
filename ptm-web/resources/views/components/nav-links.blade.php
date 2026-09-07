@@ -24,19 +24,17 @@
             'children' => [
                 ['label' => 'Truths Revealed Blog', 'href' => route('blog.index')],
                 ['label' => 'Articles', 'href' => route('articles.index')],
-                ['label' => 'Truth Topics', 'href' => route('topics.index')],
                 ['label' => 'Book Recommendations', 'href' => route('books.index')],
             ],
         ],
         ['label' => 'Studies', 'href' => '#studies', 'children' => array_merge(
             [
                 ['label' => 'Cochin Hebrew New Testament', 'href' => '#cochin', 'children' => $cochinChildren],
-                ['label' => 'Renewed Covenant', 'href' => '#renewed-covenant'],
-                ['label' => "Bryan's Travel Notes", 'href' => route('travel-notes.index')],
+                ['label' => 'Renewed Covenant', 'href' => route('renewed-covenant')],
             ]
         )],
         ['label' => 'Events', 'href' => route('events')],
-        ['label' => 'Contact', 'href' => '#contact'],
+        ['label' => 'Contact', 'href' => route('contact')],
     ];
 
     // Super-admin only links (security level 9)
@@ -53,8 +51,8 @@
                 ['label' => 'Articles', 'href' => route('admin.articles.index')],
                 ['label' => 'PDFs', 'href' => route('admin.pdfs.index')],
                 ['label' => 'Videos', 'href' => route('admin.videos.index')],
-                ['label' => 'Travel Notes', 'href' => route('admin.travel-notes.index')],
                 ['label' => 'Cochin Books', 'href' => route('admin.cochin-books.index')],
+                ['label' => 'Settings', 'href' => route('admin.settings.index')],
             ],
         ];
     }

@@ -1,5 +1,5 @@
 /**
- * PdfPicker — custom CKEditor 5 plugin for PTM
+ * PdfPicker — custom CKEditor 5 plugin for Living Scroll
  *
  * Adds a toolbar button with the Adobe PDF icon. When clicked, opens a modal
  * overlay with three tabs: Upload New, Search Library, and URL.

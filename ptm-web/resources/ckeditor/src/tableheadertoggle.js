@@ -1,5 +1,5 @@
 /**
- * TableHeaderToggle — custom CKEditor 5 plugin for PTM
+ * TableHeaderToggle — custom CKEditor 5 plugin for Living Scroll
  *
  * Adds a toolbar button that toggles the first row of the current table
  * between a header row (<thead>) and a normal data row.

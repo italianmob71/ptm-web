@@ -7624,7 +7624,7 @@ div.ck.ck-balloon-panel.ck-mention-balloon {
 
 /*# sourceMappingURL=ckeditor5.css.map */
 /* ════════════════════════════════════════════════════════════════
- * PTM Scripture Quote — custom block element styling
+ * Living Scroll Scripture Quote — custom block element styling
  * Used in both CKEditor editing view and front-end render.
  * Left accent vertical bar, distinct from blockQuote (which uses
  * a plain gray border + italic). Scripture uses accent-color bar,
@@ -7672,7 +7672,7 @@ div.ck.ck-balloon-panel.ck-mention-balloon {
 }
 
 /* ════════════════════════════════════════════════════════════════
- * PTM Table cell defaults — vertical-align: top, text-align: left
+ * Living Scroll Table cell defaults — vertical-align: top, text-align: left
  * Applies in CKEditor editing view AND front-end render.
  * ════════════════════════════════════════════════════════════════ */
 .ck-content td,
@@ -7687,14 +7687,14 @@ article th,
     text-align: left !important;
 }
 
-/* PTM Table width — fill container */
+/* Living Scroll Table width — fill container */
 .ck-content table,
 .ck-content figure.table > table {
     width: 100% !important;
 }
 
 /* ════════════════════════════════════════════════════════════════
- * PTM Table header row styling — applies when a table has a header
+ * Living Scroll Table header row styling — applies when a table has a header
  * row (thead). Visually distinct from body rows.
  * ════════════════════════════════════════════════════════════════ */
 .ck-content table thead th,

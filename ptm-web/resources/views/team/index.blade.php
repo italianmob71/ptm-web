@@ -6,7 +6,7 @@
     <div class="mx-auto max-w-7xl px-4 text-center">
         <h1 class="text-3xl md:text-4xl font-serif font-semibold" style="color: var(--color-text); margin-bottom: 0.5rem;">Our Team</h1>
         <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-text-muted);">
-            Meet the researchers, translators, and engineers behind Project Truth Ministries
+            Meet the researchers, translators, and engineers behind Living Scroll
         </p>
     </div>
 </header>

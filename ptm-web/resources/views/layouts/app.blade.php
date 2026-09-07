@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{{ config('app.name', 'PTM') }}@if(isset($title) && $title) | {{ $title }}@endif</title>
+    <title>{{ config('app.name', 'Living Scroll') }}@if(isset($title) && $title) | {{ $title }}@endif</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,9 +22,9 @@
     <header class="sticky top-0 z-50 border-b shrink-0" style="background-color: var(--color-surface); border-color: var(--color-border);">
         <div class="mx-auto max-w-7xl px-4 h-16 flex items-center">
             <div class="flex items-center flex-shrink-0">
-                <a href="{{ route('home') }}" class="block" aria-label="Project Truth Ministries">
-                    <img src="{{ asset('images/site/ptm-dark-menu.png') }}" alt="PTM" class="header-logo header-logo-dark" />
-                    <img src="{{ asset('images/site/ptm-light-menu.png') }}" alt="PTM" class="header-logo header-logo-light" />
+                <a href="{{ route('home') }}" class="block" aria-label="Living Scroll">
+                    <img src="{{ asset('images/logos/png/white-on-black-horizontal-optimized-300dpi.png') }}" alt="Living Scroll" class="header-logo header-logo-dark" />
+                    <img src="{{ asset('images/logos/png/black-on-white-horizontal-optimized-300dpi.png') }}" alt="Living Scroll" class="header-logo header-logo-light" />
                 </a>
             </div>
 
@@ -89,7 +89,7 @@
 
             <!-- Copyright - inline with nav on mobile, separate line on desktop -->
             <div class="text-center text-xs" style="color: var(--color-text-muted);">
-                © 2024 - {{ date('Y') }} Project Truth Ministries
+                © 2024 - {{ date('Y') }} Living Scroll
             </div>
         </div>
     </footer>
