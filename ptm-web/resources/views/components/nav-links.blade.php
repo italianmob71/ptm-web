@@ -22,7 +22,7 @@
             'label' => 'Resources',
             'href' => route('resources'),
             'children' => [
-                ['label' => 'Living Scroll Blog', 'href' => route('blog.index')],
+                ['label' => 'Truths Revealed Blog', 'href' => route('blog.index')],
                 ['label' => 'Articles', 'href' => route('articles.index')],
                 ['label' => 'Book Recommendations', 'href' => route('books.index')],
             ],
@@ -249,7 +249,7 @@
                 <p class="text-sm font-medium" style="color: var(--color-text);">{{ auth()->user()->name }}</p>
                 <p class="text-xs mt-0.5" style="color: var(--color-text-muted);">{{ auth()->user()->email }}</p>
             </div>
-            <a href="#" class="block px-4 py-2 hover:bg-opacity-10" style="color: var(--color-text);">Profile</a>
+            <a href="{{ route('profile.show') }}" class="block px-4 py-2 hover:bg-opacity-10" style="color: var(--color-text);">Profile</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="w-full text-left px-4 py-2 hover:bg-opacity-10" style="color: var(--color-danger);">

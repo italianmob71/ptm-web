@@ -28,6 +28,7 @@ use App\Http\Controllers\CochinBookAdminController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\EventAdminController;
 use App\Http\Controllers\SettingsAdminController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordUpdateController;
 
@@ -68,6 +69,13 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 // Password update routes (for first-time login)
 Route::get('/password/update', [PasswordUpdateController::class, 'create'])->name('password.update.form');
 Route::post('/password/update', [PasswordUpdateController::class, 'store'])->name('password.update');
+
+// User profile routes (authenticated)
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+});
 
 // CKEditor image endpoints (auth required)
 Route::get('/admin/images/search', [ImageAdminController::class, 'search'])

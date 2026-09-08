@@ -91,7 +91,7 @@
 
             <!-- Copyright - inline with nav on mobile, separate line on desktop -->
             <div class="text-center text-xs" style="color: var(--color-text-muted);">
-                © 2024 - {{ date('Y') }} Living Scroll
+                © {{ date('Y') }} Living Scroll
             </div>
         </div>
     </footer>
