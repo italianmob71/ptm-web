@@ -22,7 +22,7 @@
             'label' => 'Resources',
             'href' => route('resources'),
             'children' => [
-                ['label' => 'Truths Revealed Blog', 'href' => route('blog.index')],
+                ['label' => 'Living Scroll Blog', 'href' => route('blog.index')],
                 ['label' => 'Articles', 'href' => route('articles.index')],
                 ['label' => 'Book Recommendations', 'href' => route('books.index')],
             ],
