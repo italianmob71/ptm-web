@@ -2,8 +2,12 @@
 
 @section('content')
 <article class="blog-article" itemscope itemtype="https://schema.org/Article">
-    <!-- Article header -->
-    <header class="article-header">
+    {{-- Article header with featured image background --}}
+    @if ($post->featured_image)
+        <header class="article-header article-header--has-image" style="--featured-image: url('{{ asset($post->featured_image) }}');">
+    @else
+        <header class="article-header">
+    @endif
         <div class="article-header__inner">
             <a href="{{ route('blog.index') }}" class="back-link">
                 <span aria-hidden="true">&larr;</span> All Posts
@@ -23,14 +27,7 @@
         </div>
     </header>
 
-    <!-- Featured image -->
-    @if ($post->featured_image)
-        <div class="article-featured-image">
-            <img src="{{ asset($post->featured_image) }}"
-                 alt="{{ $post->title }}"
-                 loading="eager" />
-        </div>
-    @endif
+    {{-- Remove standalone featured image since it's now in header --}}
 
     <!-- Article body -->
     <div class="article-body prose-scholarly" itemprop="articleBody">
@@ -109,6 +106,7 @@
 </article>
 
 <style>
+    /* Article header with featured image background */
     .article-header {
         background: var(--color-surface);
         border-bottom: 1px solid var(--color-border);
@@ -118,6 +116,80 @@
         .article-header {
             padding: 4rem 2rem 3rem;
         }
+    }
+
+    .article-header--has-image {
+        position: relative;
+        background: none;
+        border-bottom: none;
+        min-height: 35rem;
+        display: flex;
+        align-items: flex-end;
+        padding: 0;
+        overflow: hidden;
+    }
+    .article-header--has-image::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: var(--featured-image);
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+    }
+    .article-header--has-image::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, 
+            rgba(0,0,0,0.15) 0%,
+            rgba(0,0,0,0.35) 30%,
+            rgba(0,0,0,0.65) 60%,
+            rgba(0,0,0,0.9) 100%
+        );
+        z-index: 1;
+    }
+    @media (prefers-color-scheme: light) {
+        .article-header--has-image::after {
+            background: linear-gradient(180deg,
+                rgba(0,0,0,0.1) 0%,
+                rgba(0,0,0,0.25) 30%,
+                rgba(0,0,0,0.5) 60%,
+                rgba(0,0,0,0.85) 100%
+            );
+        }
+    }
+    .article-header--has-image .article-header__inner {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 50rem;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 4rem;
+    }
+    @media (min-width: 768px) {
+        .article-header--has-image .article-header__inner {
+            padding: 4rem 2rem 5rem;
+        }
+    }
+    .article-header--has-image .back-link {
+        color: rgba(255,255,255,0.85);
+    }
+    .article-header--has-image .back-link:hover {
+        color: var(--color-accent);
+    }
+    .article-header--has-image .article-title {
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .article-header--has-image .article-meta {
+        color: rgba(255,255,255,0.85);
+    }
+    .article-header--has-image .article-meta__sep {
+        color: rgba(255,255,255,0.5);
+    }
+    .article-header--has-image .article-meta__author strong {
+        color: #fff;
     }
 
     .article-header__inner {
@@ -164,17 +236,6 @@
     }
     .article-meta__author strong {
         color: var(--color-text);
-    }
-
-    .article-featured-image {
-        width: 100%;
-        max-height: 28rem;
-        overflow: hidden;
-    }
-    .article-featured-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
     }
 
     .article-body {

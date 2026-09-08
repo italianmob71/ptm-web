@@ -561,7 +561,7 @@
             @forelse ($latestPosts as $post)
                 <article class="blog-post">
                     @if ($post->featured_image)
-                        <img src="{{ asset('images/site/' . $post->featured_image) }}"
+                        <img src="{{ asset($post->featured_image) }}"
                              alt="{{ $post->title }}"
                              class="blog-post__image"
                              loading="lazy" />
