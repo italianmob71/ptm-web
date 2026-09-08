@@ -141,6 +141,12 @@
                      style="max-width: 100%; max-height: 24rem; object-fit: contain;">
             </div>
 
+            {{-- Full path display for debugging --}}
+            <div class="mb-6 p-3 font-mono text-xs" style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); color: var(--color-text-muted); overflow-x: auto;">
+                <strong>Full URL:</strong> {{ asset($image->path) }}<br>
+                <strong>Stored path:</strong> {{ $image->path }}
+            </div>
+
             <div class="mb-4">
                 <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Slug *</label>
                 <input type="text" name="slug" value="{{ old('slug', $image->slug) }}"

@@ -20,7 +20,7 @@
             <div class="lg:col-span-1">
                 <div class="relative mb-6">
                     @if($book->image_front)
-                        <img src="{{ asset('images/book/' . $book->image_front) }}"
+                        <img src="{{ asset($book->image_front) }}"
                              alt="{{ $book->title }}"
                              class="w-full aspect-[2/3] object-cover rounded-lg shadow-lg"
                              style="border: 1px solid var(--color-border);">
@@ -154,7 +154,7 @@
                             <div class="aspect-[2/3] mb-3 overflow-hidden rounded-lg"
                                  style="background-color: var(--color-surface-2); border: 1px solid var(--color-border);">
                                 @if($other->image_front)
-                                    <img src="{{ asset('images/book/' . $other->image_front) }}"
+                                    <img src="{{ asset($other->image_front) }}"
                                          alt="{{ $other->title }}"
                                          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                                 @else
