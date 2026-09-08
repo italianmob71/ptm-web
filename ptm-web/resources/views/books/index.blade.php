@@ -19,7 +19,7 @@
                 @foreach ($books as $book)
                     <article class="book-card">
                         <div class="book-card__image-wrapper">
-                            <img src="{{ asset('images/books/' . $book->image_front) }}"
+                            <img src="{{ asset('images/book/' . $book->image_front) }}"
                                  alt="{{ $book->title }}"
                                  class="book-card__image"
                                  loading="lazy" />
