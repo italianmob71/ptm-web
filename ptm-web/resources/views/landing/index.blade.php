@@ -537,7 +537,7 @@
 
     <div class="about-ptm__video" aria-label="Living Scroll introduction video">
         <video controls playsinline poster="{{ asset('images/site/studies-500x500-1.jpg') }}">
-            <source src="{{ asset('videos/ptm-home.mp4') }}" type="video/mp4">
+            <source src="{{ asset('videos/ls.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
