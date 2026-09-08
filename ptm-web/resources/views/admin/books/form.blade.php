@@ -102,25 +102,16 @@
             </div>
         </div>
 
-        <!-- Three-column: image filenames -->
-        <div class="grid grid-cols-3 gap-4 mb-4">
-            <div>
-                <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Image (Front)</label>
-                <input type="text" name="image_front" value="{{ old('image_front', $book->image_front) }}"
-                       class="w-full px-3 py-2 rounded-lg border text-sm"
-                       style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);">
+        {{-- Three-column: image filenames --}}
+        <div class="space-y-4 mb-4">
+            <div class="col-span-1">
+                <x-admin.image-picker name="image_front" :value="old('image_front', $book->image_front)" label="Image (Front)" placeholder="e.g. book-front.jpg" />
             </div>
-            <div>
-                <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Image (Back)</label>
-                <input type="text" name="image_back" value="{{ old('image_back', $book->image_back) }}"
-                       class="w-full px-3 py-2 rounded-lg border text-sm"
-                       style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);">
+            <div class="col-span-1">
+                <x-admin.image-picker name="image_back" :value="old('image_back', $book->image_back)" label="Image (Back)" placeholder="e.g. book-back.jpg" />
             </div>
-            <div>
-                <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Image (Inner)</label>
-                <input type="text" name="image_inner" value="{{ old('image_inner', $book->image_inner) }}"
-                       class="w-full px-3 py-2 rounded-lg border text-sm"
-                       style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);">
+            <div class="col-span-1">
+                <x-admin.image-picker name="image_inner" :value="old('image_inner', $book->image_inner)" label="Image (Inner)" placeholder="e.g. book-inner.jpg" />
             </div>
         </div>
 

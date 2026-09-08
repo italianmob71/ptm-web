@@ -194,25 +194,46 @@ class ImageAdminController extends Controller
 
     /**
      * JSON search endpoint for the image picker modal.
-     * Returns array of {id, slug, url, alt_text, category}.
+     * Returns array of {id, slug, url, alt_text, category, file_size_human, width, height} + pagination.
      */
     public function search(Request $request)
     {
-        $query = Image::latestFirst()->limit(60);
+        $perPage = $request->integer('per_page', 24);
+        $page = $request->integer('page', 1);
+
+        $query = Image::latestFirst();
 
         if ($request->filled('q')) {
             $query->search($request->input('q'));
         }
 
-        $images = $query->get()->map(fn($img) => [
+        if ($request->filled('category') && $request->input('category') !== 'all') {
+            $query->category($request->input('category'));
+        }
+
+        $paginator = $query->paginate($perPage, ['*'], 'page', $page);
+
+        $images = $paginator->getCollection()->map(fn($img) => [
             'id' => $img->id,
             'slug' => $img->slug,
             'url' => asset($img->path),
+            'path' => $img->path,
             'alt_text' => $img->alt_text,
             'category' => $img->category,
+            'file_size_human' => $img->file_size_human,
+            'width' => $img->width,
+            'height' => $img->height,
         ]);
 
-        return response()->json($images);
+        return response()->json([
+            'images' => $images,
+            'pagination' => [
+                'current_page' => $paginator->currentPage(),
+                'last_page' => $paginator->lastPage(),
+                'total' => $paginator->total(),
+                'per_page' => $paginator->perPage(),
+            ],
+        ]);
     }
 
     /**

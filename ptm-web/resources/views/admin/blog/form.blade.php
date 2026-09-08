@@ -74,11 +74,7 @@
 
         <!-- Featured Image -->
         <div class="mb-4">
-            <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Featured Image Filename <span class="text-xs" style="color: var(--color-text-faint);">(stored in public/images/site/)</span></label>
-            <input type="text" name="featured_image" value="{{ old('featured_image', $post->featured_image) }}"
-                   class="w-full px-3 py-2 rounded-lg border text-sm"
-                   style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);"
-                   placeholder="e.g. revelation-500x500-1.jpg">
+            <x-admin.image-picker name="featured_image" :value="old('featured_image', $post->featured_image)" label="Featured Image" placeholder="e.g. revelation-500x500-1.jpg" />
         </div>
 
         <!-- Two-column: Published checkbox and Published At date -->

@@ -26,7 +26,7 @@
     <!-- Featured image -->
     @if ($post->featured_image)
         <div class="article-featured-image">
-            <img src="{{ asset('images/site/' . $post->featured_image) }}"
+            <img src="{{ asset($post->featured_image) }}"
                  alt="{{ $post->title }}"
                  loading="eager" />
         </div>
