@@ -1,0 +1,64 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel-app
+    restart: unless-stopped
+
+    ports:
+      - "8080:80"
+
+    volumes:
+      - ./:/var/www/html
+
+    environment:
+      APP_ENV: local
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - laravel
+
+  db:
+    image: mariadb:11.4.11
+    container_name: laravel-db
+    restart: unless-stopped
+
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: laravel
+      MARIADB_USER: laravel
+      MARIADB_PASSWORD: laravel
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      # Persist database files directly in the project directory.
+      #
+      # MariaDB initialization happens ONLY when this directory
+      # does not already contain an initialized database.
+      - ./docker/mariadb-data:/var/lib/mysql
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "healthcheck.sh",
+          "--connect",
+          "--innodb_initialized"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge

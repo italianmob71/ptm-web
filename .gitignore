@@ -1,3 +1,5 @@
 .vscode/
-/public/pdfs
-/public/videos
+*/public/pdfs
+*/public/videos
+*/docker/*
+*/node_modules/*
