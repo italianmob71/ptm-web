@@ -83,6 +83,16 @@ sudo find ptm-web/storage ptm-web/bootstrap/cache \
 docker compose up -d
 docker compose exec app php artisan optimize:clear
 
+# pull down images and pdfs from prod
+
+rsync -avh --ignore-existing \
+  livingsc@livingscroll.org:/home/livingsc/ptm-web/ptm-web/public/pdfs/ \
+  ./public/pdfs/
+
+rsync -avh --ignore-existing \
+  livingsc@livingscroll.org:/home/livingsc/ptm-web/ptm-web/public/images/ \
+  ./public/images/
+
 # install npm packages and build vite assets
 npm install && npn run build
 
