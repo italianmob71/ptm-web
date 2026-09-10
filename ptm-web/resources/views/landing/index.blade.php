@@ -604,7 +604,7 @@
         <header class="blog-card__header">
             <div class="blog-card__title-lines">
               <span class="blog-card__line2">Living Scroll Blog</span>
-                <span class="blog-card__line1">Explore Relevant Topics &amp; <br>Exciting Discoveries</span>
+              <span class="blog-card__line1 mt-[5px]">Explore Relevant Topics &nbsp;&amp;&nbsp; Exciting Discoveries</span>
             </div>
         </header>
 
@@ -683,5 +683,9 @@
         </div>
     </div>
 </section>
+<script>
+  var video = document.querySelector('.about-ptm__video > video');
+  video.addEventListener('ended', function() { video.load(); });
+</script>
 
 @endsection
