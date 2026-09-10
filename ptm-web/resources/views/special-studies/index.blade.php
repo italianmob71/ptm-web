@@ -8,7 +8,7 @@
     </div>
 </header>
 
-<main>
+<main class="studies">
     <div class="mx-auto max-w-7xl px-4 py-12">
         <div class="prose-scholarly max-w-4xl mx-auto" style="color: var(--color-text); font-size: 1.0625rem; line-height: 1.8;">
 
@@ -20,7 +20,7 @@
                 <ul class="pdf-list" style="list-style:none; padding:0;">
                     @forelse ($studies as $study)
                         <li style="padding:1rem 0;">
-                            <a href="{{ $study->pdf->url }}" title="{{ trim($study->pdf->description ?? '') ?: 'No Description' }}" style="display:flex; align-items:center; gap:1rem; overflow-wrap:anywhere;">
+                            <a href="{{ $study->pdf->url }}" target="_blank" rel="noopener noreferrer" title="{{ trim($study->pdf->description ?? '') ?: 'No Description' }}" style="display:flex; align-items:center; gap:1rem; overflow-wrap:anywhere;">
                                 <x-pdf-icon />
                                 <span>{{ $study->pdf->title ?: $study->pdf->filename }}</span>
                             </a>
@@ -42,5 +42,11 @@
   .pdf-list li:nth-child(even) {
     background-color: var(--color-surface);
   }
-</style>
+  .studies a {
+    text-decoration: none !important;
+  }
+  .studies a:hover {
+    text-decoration: underline !important;
+  }
+  </style>
 @endsection
