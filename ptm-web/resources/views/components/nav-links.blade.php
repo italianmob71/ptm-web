@@ -55,6 +55,7 @@
                 ['label' => 'Videos', 'href' => route('admin.videos.index')],
                 ['label' => 'Cochin Books', 'href' => route('admin.cochin-books.index')],
                 ['label' => 'Events', 'href' => route('admin.events.index')],
+                ['label' => 'Research Studies', 'href' => route('admin.research-studies.index')],
                 ['label' => 'Settings', 'href' => route('admin.settings.index')],
             ],
         ];

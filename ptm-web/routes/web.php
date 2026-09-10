@@ -5,6 +5,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\ResearchStudyAdminController;
 use App\Http\Controllers\StudiesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RenewedCovenantController;
@@ -185,6 +186,10 @@ Route::middleware(['auth', 'level:9'])->prefix('admin')->name('admin.')->group(f
     Route::post('/cochin-books/{book}/chapters', [CochinBookAdminController::class, 'storeChapter'])->name('cochin-books.chapters.store');
     Route::put('/cochin-books/{book}/chapters/{chapter}', [CochinBookAdminController::class, 'updateChapter'])->name('cochin-books.chapters.update');
     Route::delete('/cochin-books/{book}/chapters/{chapter}', [CochinBookAdminController::class, 'destroyChapter'])->name('cochin-books.chapters.destroy');
+
+    Route::put('/research-studies/page', [ResearchStudyAdminController::class, 'updatePage'])->name('research-studies.page.update');
+    Route::resource('research-studies', ResearchStudyAdminController::class)
+        ->parameters(['research-studies' => 'study'])->except('show');
 
     // Settings
     Route::get('/settings', [SettingsAdminController::class, 'index'])->name('settings.index');
