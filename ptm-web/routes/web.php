@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\StudiesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RenewedCovenantController;
 use App\Http\Controllers\SpecialStudiesController;
@@ -61,9 +63,8 @@ Route::get('/images/{slug}', [ImageViewerController::class, 'show'])->name('imag
 // Cochin Hebrew NT books
 Route::get('/studies/cochin/{slug}', [CochinBookController::class, 'show'])->name('cochin.show');
 
-Route::get('/resources', function () {
-    return view('resources.index', ['title' => 'Resources']);
-})->name('resources');
+Route::get('/resources', [ResourcesController::class, 'index'])->name('resources');
+Route::get('/studies', [StudiesController::class, 'index'])->name('studies');
 
 // Auth routes
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');

@@ -27,7 +27,7 @@
                 ['label' => 'Book Recommendations', 'href' => route('books.index')],
             ],
         ],
-        ['label' => 'Studies', 'href' => '#studies', 'children' => array_merge(
+        ['label' => 'Studies', 'href' => route('studies'), 'children' => array_merge(
             [
                 ['label' => 'Cochin Hebrew New Testament', 'href' => '#cochin', 'children' => $cochinChildren],
                 ['label' => 'Renewed Covenant', 'href' => route('renewed-covenant')],
