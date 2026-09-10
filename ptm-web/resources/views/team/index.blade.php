@@ -21,7 +21,7 @@
         <li>Bryan Williams, historian, videographer</li>
         <li>Al Garza, PhD</li>
         <li>Douglas Hamp, PhD</li>
-        <li>Nichole and Ian &mdash; HaDerekh Radio</li>
+        <li>Nicole and Ian Mackie &mdash; HaDerekh Radio</li>
         <li>Pastor Beverly Kelling and Joanne Neuman &mdash; St. Paul Lutheran Church, Hondo, Texas</li>
       </ul>
       <h2 class="text-2xl font-serif font-semibold mt-[40px]">Core Team</h2>
