@@ -11,8 +11,20 @@
     </div>
 </header>
 
-<main>
+<main class="team">
     <div class="mx-auto max-w-7xl px-4 py-12">
+      <h2 class="text-2xl font-serif font-semibold">Acknowledgments</h2>
+      <p>We gratefully recognize the team members, partners, and contributors whose time, encouragement, expertise, and support helped make this vision possible. Thank you for being part of the journey.</p>
+      <ul>
+        <li>Angel and Olivia Barradas &mdash; Vaqueros Restaurant, Hondo, Texas</li>
+        <li>Jeff and Miranda Brannon &mdash; The Way Remnant</li>
+        <li>Bryan Williams, historian, videographer</li>
+        <li>Al Garza, PhD</li>
+        <li>Douglas Hamp, PhD</li>
+        <li>Nichole and Ian &mdash; HaDerekh Radio</li>
+        <li>Pastor Beverly Kelling and Joanne Neuman &mdash; St. Paul Lutheran Church, Hondo, Texas</li>
+      </ul>
+      <h2 class="text-2xl font-serif font-semibold mt-[40px]">Core Team</h2>
         <!-- Team Grid -->
         <div class="team-grid">
             @foreach ($teamMembers as $member)
@@ -64,6 +76,29 @@
 </main>
 
 <style>
+    .team h2 {
+      font-weight: bold;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+    }
+
+    .team {
+      color: var(--color-text-muted);
+      font-size: 14px;
+    }
+
+    .team p {
+      max-width: 1070px;
+    }
+
+    .team ul {
+      margin-top: 20px;
+      list-style-type: disc;
+      list-style-position: outside;
+      list-style-image: none;
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
     /* ===== Team Page Styles ===== */
     .team-grid {
         display: grid;
@@ -71,6 +106,7 @@
         gap: 2rem;
         max-width: 80rem;
         margin: 0 auto;
+        margin-top: 20px;
     }
     @media (min-width: 768px) {
         .team-grid {
