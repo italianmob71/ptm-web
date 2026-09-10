@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="research-admin mx-auto max-w-4xl px-4 py-8" style="color: var(--color-text);">
+<div class="content-admin mx-auto max-w-4xl px-4 py-8" style="color: var(--color-text);">
     <h1 class="font-serif text-3xl font-bold mb-6">{{ $study->exists ? 'Edit Research Study' : 'Add Research Study' }}</h1>
     @include('admin.research-studies.errors')
     <form method="POST" enctype="multipart/form-data" action="{{ $study->exists ? route('admin.research-studies.update', $study) : route('admin.research-studies.store') }}">
@@ -15,7 +15,7 @@
         </div>
         <div class="mb-4">
             <label for="study-description">Description *</label>
-            <textarea id="study-description" name="description" data-research-editor rows="8">{{ old('description', $study->description) }}</textarea>
+            <textarea id="study-description" name="description" data-content-editor rows="8">{{ old('description', $study->description) }}</textarea>
         </div>
         <p class="text-sm mb-4">Enter dates and times in {{ config('app.timezone') }}.</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

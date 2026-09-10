@@ -10,6 +10,7 @@ use App\Http\Controllers\StudiesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RenewedCovenantController;
 use App\Http\Controllers\SpecialStudiesController;
+use App\Http\Controllers\SpecialStudyAdminController;
 use App\Http\Controllers\GetInvolvedInResearchController;
 use App\Http\Controllers\EventCalendarController;
 use App\Http\Controllers\BlogController;
@@ -190,6 +191,12 @@ Route::middleware(['auth', 'level:9'])->prefix('admin')->name('admin.')->group(f
     Route::put('/research-studies/page', [ResearchStudyAdminController::class, 'updatePage'])->name('research-studies.page.update');
     Route::resource('research-studies', ResearchStudyAdminController::class)
         ->parameters(['research-studies' => 'study'])->except('show');
+
+    Route::get('/special-studies', [SpecialStudyAdminController::class, 'index'])->name('special-studies.index');
+    Route::put('/special-studies/page', [SpecialStudyAdminController::class, 'updatePage'])->name('special-studies.page.update');
+    Route::post('/special-studies', [SpecialStudyAdminController::class, 'store'])->name('special-studies.store');
+    Route::put('/special-studies/{study}/move', [SpecialStudyAdminController::class, 'move'])->name('special-studies.move');
+    Route::delete('/special-studies/{study}', [SpecialStudyAdminController::class, 'destroy'])->name('special-studies.destroy');
 
     // Settings
     Route::get('/settings', [SettingsAdminController::class, 'index'])->name('settings.index');

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="research-admin mx-auto max-w-6xl px-4 py-8" style="color: var(--color-text);">
+<div class="content-admin mx-auto max-w-6xl px-4 py-8" style="color: var(--color-text);">
     <h1 class="font-serif text-3xl font-bold mb-6">Research Studies</h1>
     @if (session('status'))
         <p role="status" class="mb-4" style="color: var(--color-success);">{{ session('status') }}</p>
@@ -19,7 +19,7 @@
             </div>
             <div class="mb-4">
                 <label for="page-content">Introduction *</label>
-                <textarea id="page-content" name="content" data-research-editor rows="8">{{ old('content', $page->content) }}</textarea>
+                <textarea id="page-content" name="content" data-content-editor rows="8">{{ old('content', $page->content) }}</textarea>
             </div>
             <button type="submit" class="px-6 py-2 rounded-lg" style="background: var(--color-accent); color: var(--color-text-inv);">Save page content</button>
             <a href="{{ route('get-involved') }}" class="ml-4 underline">View page</a>

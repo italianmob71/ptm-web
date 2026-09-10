@@ -56,6 +56,7 @@
                 ['label' => 'Cochin Books', 'href' => route('admin.cochin-books.index')],
                 ['label' => 'Events', 'href' => route('admin.events.index')],
                 ['label' => 'Research Studies', 'href' => route('admin.research-studies.index')],
+                ['label' => 'Special Studies', 'href' => route('admin.special-studies.index')],
                 ['label' => 'Settings', 'href' => route('admin.settings.index')],
             ],
         ];
@@ -93,7 +94,7 @@
                 </button>
 
                 <div
-                    x-show="open"
+                    x-cloak x-show="open"
                     x-transition:enter="transition ease-out duration-100"
                     x-transition:enter-start="transform opacity-0 scale-95"
                     x-transition:enter-end="transform opacity-100 scale-100"
@@ -121,7 +122,7 @@
                                     </svg>
                                 </button>
                                 <div
-                                    x-show="subopen"
+                                    x-cloak x-show="subopen"
                                     x-transition
                                     class="absolute left-full top-0 min-w-[180px] rounded-lg shadow-lg border z-50"
                                     style="background-color: var(--color-surface); border-color: var(--color-border);"
@@ -170,7 +171,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                     </svg>
                 </button>
-                <div x-show="open" x-collapse style="padding-left: 1rem; padding-bottom: 0.5rem;">
+                <div x-cloak x-show="open" x-collapse style="padding-left: 1rem; padding-bottom: 0.5rem;">
                     @foreach ($link['children'] as $child)
                         @if (isset($child['children']))
                             <div x-data="{ subopen: false }">
@@ -184,7 +185,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"/>
                                     </svg>
                                 </button>
-                                <div x-show="subopen" x-collapse style="padding-left: 1rem;">
+                                <div x-cloak x-show="subopen" x-collapse style="padding-left: 1rem;">
                                     @foreach ($child['children'] as $grandchild)
                                         <a href="{{ $grandchild['href'] }}"
                                            class="block py-2"
@@ -237,7 +238,7 @@
         </button>
 
         <div
-            x-show="open"
+            x-cloak x-show="open"
             x-transition:enter="transition ease-out duration-100"
             x-transition:enter-start="transform opacity-0 scale-95"
             x-transition:enter-end="transform opacity-100 scale-100"

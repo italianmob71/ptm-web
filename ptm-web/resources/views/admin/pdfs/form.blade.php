@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@php($forSpecialStudies = old('from', ($forSpecialStudies ?? false) ? 'special-studies' : '') === 'special-studies')
 <div class="mx-auto max-w-3xl px-4 py-8">
     <h1 class="font-serif text-3xl font-bold mb-6" style="color: var(--color-text);">
         {{ $pdf->exists ? 'Edit PDF: ' . Str::limit($pdf->slug, 50) : 'Upload PDF' }}
@@ -26,6 +27,10 @@
         {{-- Upload form --}}
         <form method="POST" action="{{ route('admin.pdfs.store') }}" enctype="multipart/form-data">
             @csrf
+            @if ($forSpecialStudies)
+                <input type="hidden" name="from" value="special-studies">
+                <p class="mb-4 text-sm">After uploading, you will return to Special Studies to add this PDF to the download list.</p>
+            @endif
 
             {{-- Upload / URL toggle --}}
             <div class="mb-6">
@@ -89,7 +94,7 @@
 
             <div class="mb-4">
                 <label class="block text-sm font-medium mb-1" style="color: var(--color-text);">Category <span class="text-xs" style="color: var(--color-text-faint);">(optional — for grouping)</span></label>
-                <input type="text" name="category" value="{{ old('category') }}"
+                <input type="text" name="category" value="{{ old('category', $forSpecialStudies ? 'Special Studies' : '') }}"
                        list="category-list"
                        class="w-full h-9 px-3 border rounded-lg text-sm"
                        style="border-color: var(--color-border); background-color: var(--color-surface); color: var(--color-text);"
@@ -115,7 +120,7 @@
                         style="background-color: var(--color-accent); color: var(--color-text-inv);">
                     Upload
                 </button>
-                <a href="{{ route('admin.pdfs.index') }}"
+                <a href="{{ route($forSpecialStudies ? 'admin.special-studies.index' : 'admin.pdfs.index') }}"
                    class="text-sm" style="color: var(--color-text-muted);">Cancel</a>
             </div>
         </form>
@@ -242,7 +247,7 @@
                         style="background-color: var(--color-accent); color: var(--color-text-inv);">
                     Save Changes
                 </button>
-                <a href="{{ route('admin.pdfs.index') }}"
+                <a href="{{ route($forSpecialStudies ? 'admin.special-studies.index' : 'admin.pdfs.index') }}"
                    class="text-sm" style="color: var(--color-text-muted);">Cancel</a>
             </div>
         </form>

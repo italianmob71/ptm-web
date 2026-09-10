@@ -46,13 +46,14 @@ class PdfAdminController extends Controller
     /**
      * Show create form.
      */
-    public function create()
+    public function create(Request $request)
     {
         $categories = Pdf::categories();
 
         return view('admin.pdfs.form', [
             'title' => 'Upload PDF',
             'pdf' => new Pdf(),
+            'forSpecialStudies' => $request->query('from') === 'special-studies',
             'categories' => $categories,
         ]);
     }
@@ -141,7 +142,8 @@ class PdfAdminController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.pdfs.index')
+            ->route($request->input('from') === 'special-studies' ? 'admin.special-studies.index' : 'admin.pdfs.index')
+            ->with('uploaded_pdf_id', $pdf->id)
             ->with('status', "PDF \"{$pdf->slug}\" uploaded successfully.");
     }
 

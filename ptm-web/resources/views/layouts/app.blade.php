@@ -2,6 +2,7 @@
 <html lang="en" class="h-full" data-theme="dark">
 <head>
     <meta charset="utf-8" />
+    <style>[x-cloak] { display: none !important; }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{{ config('app.name', 'Living Scroll') }}@if(isset($title) && $title) | {{ $title }}@endif</title>
 
@@ -90,7 +91,7 @@
             </div>
 
             <!-- Copyright - inline with nav on mobile, separate line on desktop -->
-            <div class="text-center text-xs" style="color: var(--color-text-muted);">
+            <div class="text-center text-xs" style="color: var(--color-text-muted); opacity: 0.5;">
                 © {{ date('Y') }} Living Scroll
             </div>
         </div>
