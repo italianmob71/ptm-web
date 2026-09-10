@@ -220,7 +220,7 @@
         font-size: 0.75rem;
         font-weight: 600;
         border-radius: var(--radius-md);
-        text-decoration: none;
+        text-decoration: none !important;
         transition: all 0.2s ease;
         white-space: nowrap;
     }
@@ -233,7 +233,7 @@
 
     .book-btn--amazon {
         background-color: #ff9900;
-        color: #111;
+        color: #111 !important;
     }
     .book-btn--amazon:hover {
         background-color: #e68a00;
@@ -241,17 +241,17 @@
 
     .book-btn--lulu {
         background-color: var(--color-surface);
-        color: var(--color-text);
+        color: var(--color-text) !important;
         border: 1px solid var(--color-border);
     }
     .book-btn--lulu:hover {
         border-color: var(--color-accent);
-        color: var(--color-accent);
+        color: var(--color-accent) !important;
     }
 
     .book-btn--details {
         background-color: var(--color-accent);
-        color: var(--color-text-inv);
+        color: var(--color-text-inv) !important;
     }
     .book-btn--details:hover {
         background-color: var(--color-accent-hi);

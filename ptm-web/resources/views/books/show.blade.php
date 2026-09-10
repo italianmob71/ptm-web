@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<style>.deets a:hover { text-decoration: none !important }</style>
 <!-- Book Detail Page -->
 <main>
     <div class="mx-auto max-w-5xl px-4 py-12">
@@ -149,7 +150,7 @@
             <h2 class="font-serif text-2xl font-semibold mb-6" style="color: var(--color-text);">More Recommendations</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($otherBooks as $other)
-                    <article class="group">
+                    <article class="group deets">
                         <a href="{{ route('books.show', $other->slug) }}">
                             <div class="aspect-[2/3] mb-3 overflow-hidden rounded-lg"
                                  style="background-color: var(--color-surface-2); border: 1px solid var(--color-border);">
