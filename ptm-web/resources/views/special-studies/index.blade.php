@@ -36,6 +36,9 @@
 </main>
 <style>
   .pdf-list { border: 2px solid var(--color-surface); }
+  .pdf-list li > a {
+    padding: 0 10px;
+  }
   .pdf-list li:nth-child(even) {
     background-color: var(--color-surface);
   }
