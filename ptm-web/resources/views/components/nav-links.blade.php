@@ -22,7 +22,7 @@
             'label' => 'Resources',
             'href' => route('resources'),
             'children' => [
-                ['label' => 'Truths Revealed Blog', 'href' => route('blog.index')],
+                ['label' => 'Living Scroll Blog', 'href' => route('blog.index')],
                 ['label' => 'Articles', 'href' => route('articles.index')],
                 ['label' => 'Book Recommendations', 'href' => route('books.index')],
             ],
@@ -31,6 +31,8 @@
             [
                 ['label' => 'Cochin Hebrew New Testament', 'href' => '#cochin', 'children' => $cochinChildren],
                 ['label' => 'Renewed Covenant', 'href' => route('renewed-covenant')],
+                ['label' => 'Special Studies', 'href' => route('special-studies')],
+                ['label' => 'Get Involved in Research', 'href' => route('get-involved')],
             ]
         )],
         ['label' => 'Events', 'href' => route('events')],

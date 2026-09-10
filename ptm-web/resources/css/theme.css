@@ -30,3 +30,22 @@ html[data-theme=dark] {
 
   --color-crimson-400: oklch(0.70 0.18 25);
   --color-crimson-500: oklch(0.60 0.20 22);
+}
+
+[data-theme=light] a {
+  text-decoration: none;
+  color: oklch(42.49% 0.15 35.46);
+  &:hover {
+    text-decoration: underline;
+    color: oklch(35.1% 0.14 29.23);
+  }
+}
+
+[data-theme=dark] a {
+  text-decoration: none;
+  color: oklch(81.72% 0.15 84.13);
+  &:hover {
+    text-decoration: underline;
+    color: oklch(87.7% 0.13 87.16);
+  }
+}

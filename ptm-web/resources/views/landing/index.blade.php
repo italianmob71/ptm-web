@@ -4,18 +4,6 @@
 <style>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     /* ===== Feature Cards Grid ===== */
     .feature-cards {
         display: grid;
@@ -28,7 +16,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 1.25rem;
             padding: 4rem 2rem;
-            max-width: 80rem;
+            max-width: 82rem;
             margin: 0 auto;
         }
     }
@@ -46,6 +34,9 @@
         transform: translateY(-4px);
         box-shadow: var(--shadow-lg);
         border-color: var(--color-accent);
+        & a {
+          text-decoration: none !important;
+        }
     }
 
     .feature-card__image {
@@ -139,11 +130,11 @@
         gap: 0.5rem;
         padding: 0.75rem 1.5rem;
         background: var(--color-accent);
-        color: var(--color-text-inv);
+        color: var(--color-text-inv) !important;
         font-size: 0.875rem;
         font-weight: 500;
         border-radius: var(--radius-md);
-        text-decoration: none;
+        text-decoration: none !important;
         transition: background-color 0.2s ease, transform 0.1s ease;
         width: fit-content;
     }
@@ -297,24 +288,25 @@
     }
 
     .blog-post__btn {
+        margin-top: 15px;
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
         padding: 0.625rem 1.25rem;
         background: transparent;
         border: 2px solid var(--color-accent);
-        color: var(--color-accent);
+        color: var(--color-accent) !important;
         font-size: 0.8125rem;
         font-weight: 600;
         letter-spacing: 0.025em;
         border-radius: var(--radius-md);
-        text-decoration: none;
+        text-decoration: none !important;
         transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
         width: fit-content;
     }
     .blog-post__btn:hover {
         background: var(--color-accent);
-        color: var(--color-text-inv);
+        color: var(--color-text-inv) !important;
         transform: translateX(4px);
     }
 
@@ -441,11 +433,11 @@
         gap: 0.5rem;
         padding: 0.75rem 1.5rem;
         background: var(--color-accent);
-        color: var(--color-text-inv);
+        color: var(--color-text-inv) !important;
         font-size: 0.875rem;
         font-weight: 600;
         border-radius: var(--radius-md);
-        text-decoration: none;
+        text-decoration: none !important;
         transition: background-color 0.2s ease, transform 0.1s ease;
         width: fit-content;
     }
@@ -536,14 +528,74 @@
     </div>
 
     <div class="about-ptm__video" aria-label="Living Scroll introduction video">
-        <video controls playsinline poster="{{ asset('images/site/studies-500x500-1.jpg') }}">
+        <video controls playsinline poster="{{ asset('images/site/video-thumbnail.jpg') }}">
             <source src="{{ asset('videos/ls.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 </section>
 
+<!-- Featured Card Section -->
+ <section aria-labelledby="features-heading">
+    <h2 id="features-heading" class="sr-only">Featured Studies</h2>
 
+    <div class="feature-cards">
+        <!-- Card 1: Get Involved -->
+        <article class="feature-card"><a href="/studies/get-involved-in-research">
+            <img src="/images/site/get-involved-500x500-1.jpg" alt="" class="feature-card__image" loading="lazy">
+            <div class="feature-card__content">
+                <h3 class="feature-card__title">Get Involved!</h3>
+                <p class="feature-card__body">
+                    Help us discover new Biblical insights! Sign-up to participate in one of our special research projects. There are several upcoming scripture and prayer-based observation studies.
+                </p>
+            </div></a>
+        </article>
+
+        <!-- Card 2: Cochin Revelation -->
+        <article class="feature-card"><a href="/studies/cochin/Cochin-Hebrew-Revelation">
+            <img src="https://staging.projecttruthministries.org/images/site/revelation-500x500-2.jpg" alt="" class="feature-card__image" loading="lazy">
+            <div class="feature-card__content">
+                <h3 class="feature-card__title">Cochin Revelation</h3>
+                <p class="feature-card__body">
+                    The Cochin Hebrew Revelation MS Oo.1.16.2 (The Scroll of Mysteries) is a unique Hebrew Revelation with late Second Temple grammar. Discover more through the free translation and videos featuring Janice F. Baca and Bryan S. Williams.
+                </p>
+            </div></a>
+        </article>
+
+        <!-- Card 3: Cochin New Testament -->
+        <!--article class="feature-card">
+            <img src="/images/site/new-testament-500x500-1.jpg" alt="" class="feature-card__image" loading="lazy">
+            <div class="feature-card__content">
+                <h3 class="feature-card__title">Cochin New Testament</h3>
+                <p class="feature-card__body">
+                    The Cochin Hebrew New Testament MS Oo.1.32, Oo.1.16 were discovered in Cochin, India in the Malabari Synagogue of the black Jews by Claudius Buchanan in 1806. These manuscripts are being analyzed and mysteries revealed.
+                </p>
+            </div>
+        </article -->
+
+        <!-- Card 4: The Renewed Covenant -->
+        <article class="feature-card"><a href="/studies/renewed-covenant">
+            <img src="/images/site/renewed-500x500-1.jpg" alt="" class="feature-card__image" loading="lazy">
+            <div class="feature-card__content">
+                <h3 class="feature-card__title">The Renewed Covenant</h3>
+                <p class="feature-card__body">
+                    Discover the deeper meaning of the Renewed Covenant: The Covenant of Friendship described in Jeremiah 31:31–34 through the fuller meaning of the blood covenant. Download your copy of the free research paper.
+                </p>
+            </div></a>
+        </article>
+
+        <!-- Card 5: Special Studies -->
+        <article class="feature-card"><a href="/studies/special-studies">
+            <img src="/images/site/studies-500x500-1.jpg" alt="" class="feature-card__image" loading="lazy">
+            <div class="feature-card__content">
+                <h3 class="feature-card__title">Special Studies</h3>
+                <p class="feature-card__body">
+                    From Biblical truths, archaeological findings, and ancient Hebrew manuscripts, this is the place to find a treasure of unique and intriguing studies.
+                </p>
+            </div>
+        </article>
+    </div></a>
+</section>
 
 <!-- Truths Revealed Blog Section -->
 <section class="blog-section" aria-labelledby="blog-heading">
@@ -551,8 +603,8 @@
         <!-- Section Title Bar -->
         <header class="blog-card__header">
             <div class="blog-card__title-lines">
-                <span class="blog-card__line1">Living Scroll &ndash; Presents</span>
-                <span class="blog-card__line2">Truths Revealed Blog</span>
+              <span class="blog-card__line2">Living Scroll Blog</span>
+                <span class="blog-card__line1">Explore Relevant Topics &amp; <br>Exciting Discoveries</span>
             </div>
         </header>
 
